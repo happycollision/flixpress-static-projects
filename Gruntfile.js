@@ -142,7 +142,7 @@ module.exports = function (grunt) {
       dev: {
         options: {
           processors: [
-            require('autoprefixer-core')({browsers: '> 0.05%'}).postcss
+            require('autoprefixer-core')({browsers: '> 0.05%'})
           ]
         },
         src: '.tmp/*.css'
@@ -150,7 +150,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           processors: [
-            require('autoprefixer-core')({browsers: '> 0.05%'}).postcss,
+            require('autoprefixer-core')({browsers: '> 0.05%'})
           ],
         },
         files: [{
@@ -163,8 +163,8 @@ module.exports = function (grunt) {
       distmin: {
         options: {
           processors: [
-            require('autoprefixer-core')({browsers: '> 0.05%'}).postcss,
-            require('csswring').postcss
+            require('autoprefixer-core')({browsers: '> 0.05%'}),
+            require('csswring')
           ],
         },
         files: [{
