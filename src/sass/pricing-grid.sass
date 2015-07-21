@@ -1,0 +1,167 @@
+$flixpress-red: #C20016
+$alt-color: #4B8E8B
+$body-color: white
+$squares-color: #eee
+$square-border: #ddd
+$base-font-size: 16px
+$show-table-size: 800px
+
+@import "susy", "breakpoint"
+
+.notes
+  background-color: #feb
+  padding: 0.75em
+  line-height: 1.3
+
+  h3, ul
+    margin-top: 0
+    padding-top: 0
+    margin-bottom: 0
+    padding-bottom: 0
+
+  li
+    margin-top: 0.65em
+
+body
+  background: $body-color
+  font-family: arial
+
+.pricing
+  font-size: $base-font-size //Same as Chrome default
+  line-height: 1.5
+
+  *
+    text-align: center
+    box-sizing: border-box
+
+  .tier-name
+    font-size: 1.5em
+
+  .feature
+    color: green
+    background-color: $squares-color
+
+  .explainer
+    font-size: 0.75em
+    line-height: 1.1
+    float: right
+    height: 1em
+    width: 1em
+    display: block
+    padding: 1px
+    border-radius: 1em
+    margin: 2px
+    background: darken($squares-color,10)
+    color: lighten($squares-color, 20)
+    cursor: pointer
+    -webkit-font-smoothing: antialiased
+
+  .price-block
+    background: $alt-color !important
+    color: white
+    padding: 8px
+    -webkit-font-smoothing: antialiased
+
+  .best-price
+    font-size: 1.5em
+    line-height: 1
+    display: block
+    margin: 12px auto 0
+
+  .buy-now-button
+    line-height: 1
+    color: white
+    background-color: $flixpress-red
+    display: inline-block
+    padding: 0.5em 0.75em
+    border-radius: 5px
+    margin: 3px auto
+    text-decoration: none
+
+    &:hover
+      background-color: lighten($flixpress-red, 10)
+
+  .disclaimer
+    margin: 1em
+    font-size: 0.75em
+    display: block
+
+
+  .pricing-grid
+    display: none
+    font-size: 0.85em
+    margin: auto
+    width: 100%
+    border-collapse: collapse
+
+    +breakpoint($show-table-size)
+      display: block
+    
+    +breakpoint(1090px)
+      font-size: 1em
+    
+    td
+      background: $squares-color
+      width: 13.33%
+      padding: 8px 8px
+      line-height: 1
+
+      &:first-child
+        width: 33.35%
+
+    .feature-row
+      border-top: 1px solid $square-border
+
+    .first-feature
+      border-top: none
+
+    .empty
+      background: transparent !important
+
+    .heading td
+      background: transparent
+      border: none
+
+    .buy-now-row td
+      background-color: transparent
+
+
+
+
+
+  .pricing-list, .pricing-list ul
+    padding-left: 0
+
+    li
+      list-style: none
+      background-color: $squares-color
+
+  .pricing-list
+    max-width: 445px
+    margin: auto
+    
+    +breakpoint($show-table-size)
+      display: none
+
+    > li
+      margin-top: 3em
+
+    .tier-name
+      font-size: 2em
+
+    .buy-now-button
+      width: 100%
+      font-size: 1.5em
+
+    .buy-now
+      padding: 12px 6px
+
+    .best-price
+      font-size: 2em
+
+    .feature
+      border-bottom: 1px solid $square-border
+      padding: 8px
+
+    .secondary-feature
+      display: none
