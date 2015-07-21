@@ -35,11 +35,11 @@ module.exports = function (grunt) {
       }
     },
     copy: {
-      html: {
+      dev: {
         files: [{
           expand: true,
           cwd: 'src/',
-          src:  ['**.html'],
+          src:  ['**/*.{html,js}'],
           dest: '.tmp/',
           filter: 'isFile'
         }]
@@ -119,9 +119,9 @@ module.exports = function (grunt) {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', /*'qunit'*/]
       },
-      html: {
-        files: 'src/**.html',
-        tasks: ['copy:html']
+      dev: {
+        files: 'src/**/*.{html,js}',
+        tasks: ['copy:dev']
       },
       livereload: {
         options: {
@@ -198,7 +198,7 @@ module.exports = function (grunt) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve']);
   });
-  grunt.registerTask('serve', ['clean:dev', 'css', 'connect', 'copy:html', 'watch']);
+  grunt.registerTask('serve', ['clean:dev', 'css', 'connect', 'copy:dev', 'watch']);
   
   grunt.registerTask('css', function (target){
     if (target === 'dist') {
