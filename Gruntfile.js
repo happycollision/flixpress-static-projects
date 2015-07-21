@@ -182,7 +182,7 @@ module.exports = function (grunt) {
           hostname: '*',
           port: 9000,
           livereload: 35728,
-          base: '.tmp',
+          base: ['bower_components','.tmp'],
           open: {
             target: 'http://localhost:9000/',
             appName: 'google chrome'
