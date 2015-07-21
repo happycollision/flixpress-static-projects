@@ -5,6 +5,7 @@ $squares-color: #eee
 $square-border: #ddd
 $base-font-size: 16px
 $show-table-size: 800px
+$feature-text-color: #000
 
 @import "susy", "breakpoint"
 
@@ -38,7 +39,7 @@ body
     font-size: 1.5em
 
   .feature
-    color: green
+    color: $feature-text-color
     background-color: $squares-color
 
   .explainer
@@ -165,3 +166,13 @@ body
 
     .secondary-feature
       display: none
+
+    .more-info
+      @extend .feature
+      display: none
+      cursor: pointer
+      text-decoration: underline
+      color: $alt-color
+
+      &:hover
+        background-color: darken($squares-color, 10)
