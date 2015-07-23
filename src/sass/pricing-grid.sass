@@ -27,6 +27,20 @@ body
   background: $body-color
   font-family: arial
 
+.button
+  line-height: 1
+  color: white
+  background-color: $flixpress-red
+  display: inline-block
+  padding: 0.5em 0.75em
+  border-radius: 5px
+  margin: 3px auto
+  text-decoration: none
+
+  &:hover
+    background-color: lighten($flixpress-red, 10)
+
+
 .pricing
   font-size: $base-font-size //Same as Chrome default
   line-height: 1.5
@@ -71,17 +85,7 @@ body
     margin: 12px auto 0
 
   .buy-now-button
-    line-height: 1
-    color: white
-    background-color: $flixpress-red
-    display: inline-block
-    padding: 0.5em 0.75em
-    border-radius: 5px
-    margin: 3px auto
-    text-decoration: none
-
-    &:hover
-      background-color: lighten($flixpress-red, 10)
+    @extend .button
 
   .disclaimer
     margin: 1em
