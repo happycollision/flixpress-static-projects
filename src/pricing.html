@@ -9,7 +9,10 @@
     <h3>Notes:</h3>
     <ul>
       <li>
-        The pop-over is a work in progress.
+        The slide-over syntax now needs to support adding content to the slide-over. It should support <code>href</code> and HTML <code>data</code> attributes (data being the overriding one if both are present).
+      </li>
+      <li>
+        Now, if you click the modal button before the page is done loading, it will take you to google.com (it's <code>href</code>). This illustrates the need to only use the href as a fallback.
       </li>
       <li>
         You may need to clear your cache to get the latest styles.
@@ -21,7 +24,7 @@
   </div>
 
  
-  <a class="modal button" href="#" data-template-number="23">Modal Pop-over</a>
+  <a class="modal button" href="http://google.com" data-template-number="23">Modal Slide-over</a>
   This button will cover the content with a fixed position div. Click the X to close it.
 
   <div class="pricing">
@@ -437,6 +440,11 @@
     <script src="/jquery/jquery.min.js"></script>
 
     <script>window.jQuery || document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><\/script>')</script>
+
+    <script src="/jquery-ui/ui/effect.js"></script>
+    <script src="/jquery-ui/ui/effect-slide.js"></script>
+
+    <script>window.jQuery.ui || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"><\/script>')</script>
 
     <script src="js/show-hide-more-info.js"></script>
     <script src="js/flixpress-modal.js"></script>
