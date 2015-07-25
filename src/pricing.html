@@ -12,7 +12,7 @@
         The slide-over syntax now needs to support adding content to the slide-over. It should support <code>href</code> and HTML <code>data</code> attributes (data being the overriding one if both are present).
       </li>
       <li>
-        Now, if you click the modal button before the page is done loading, it will take you to google.com (it's <code>href</code>). This illustrates the need to only use the href as a fallback.
+        Now, if you click the modal button before the page is done loading, it will take you to google.com (its <code>href</code>). This illustrates the need to only use the href as a fallback.
       </li>
       <li>
         Safari has issues with <code>position:fixed</code> that need resolving for the modal.
@@ -23,11 +23,14 @@
       <li>
         The explainer question marks feature are still a work in progress (which will not be completed until this current design is given the OK). Right now they work as plain html links to the bottom of the page. Eventually they will be javascript hover boxes. Mobile users won't ever see them at all.
       </li>
+      <li>
+        Currently, the styles for the modal are all in the javascript file. The ones that are functional should stay there, while the ones that are visual should be moved out to a separate file.
+      </li>
     </ul>
   </div>
 
  
-  <a class="modal button" href="http://google.com" data-template-number="23">Push me for modal</a>(wait until the page loads... see notes above)
+  <a class="modal button" href="http://google.com" data-template-number="23">Push me for modal</a> (wait until the page loads... see notes above)
 
   <div class="pricing">
 
