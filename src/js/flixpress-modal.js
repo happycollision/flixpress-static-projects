@@ -11,6 +11,34 @@
   $closeButton.prependTo($toolbar);
   $modalFull.append($modalContent).hide();
 
+  function showModal(size, content){
+    
+    // TODO: add real content to pop-over
+    $modalContent.html(content);
+
+    // Freeze body scrolling
+    $('body').css({overflow: 'hidden'});
+
+    if (size === 'full') {
+    $modalFull.show('slide', {direction: 'down'}, function(){
+      $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
+        }
+      );
+
+    } else {
+
+    }
+  }
+
+  function closeModal(){
+    // Allow body scrolling again
+    $('body').css({overflow: 'auto'});
+    
+    // hide pop-over and toolbar
+    $modalFull.hide('slide', {direction: 'down'});
+    $toolbar.hide('slide', {direction: 'up'});
+  }
+
   $(document).ready(function(){
     // append to body ASAP, ready for action
     $modalFull.appendTo('body');
@@ -20,26 +48,11 @@
       // stop href from working
       e.preventDefault();
 
-      // TODO: add real content to pop-over
-      $modalContent.html($('.modal-content').html());
-
-      // Freeze body scrolling
-      $('body').css({overflow: 'hidden'});
 
       // show pop-over
-      $modalFull.show('slide', {direction: 'down'}, function(){
-        $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
-      });
-
+      showModal('full', $('.modal-content').html());
       // close pop-over
-      $('body').on('click', '.flixpress-modal-close-button', function(){
-        // Allow body scrolling again
-        $('body').css({overflow: 'auto'});
-        
-        // hide pop-over and toolbar
-        $modalFull.hide('slide', {direction: 'down'});
-        $toolbar.hide('slide', {direction: 'up'});
-      });
+      $('body').on('click', '.flixpress-modal-close-button', closeModal);
     });
     $('.modal.button').click();
   });
