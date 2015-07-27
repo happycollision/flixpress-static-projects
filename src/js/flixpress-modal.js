@@ -28,6 +28,15 @@
     } else {
 
     }
+    
+    // bind certain events to close the modal
+    $('body').on('click.fpModalClose', '.flixpress-modal-close-button', closeModal);
+    $(document).on('keyup.fpModalClose', function(e){
+      if (e.which === 27){
+        closeModal();
+        //$(document).unbind('keyup');
+      }
+    });
   }
 
   function closeModal(){
@@ -37,6 +46,9 @@
     // hide pop-over and toolbar
     $modalFull.hide('slide', {direction: 'down'});
     $toolbar.hide('slide', {direction: 'up'});
+
+    //unbind the modal close event
+    $(document).off('.fpModalClose');
   }
 
   $(document).ready(function(){
@@ -51,8 +63,8 @@
 
       // show pop-over
       showModal('full', $('.modal-content').html());
-      // close pop-over
-      $('body').on('click', '.flixpress-modal-close-button', closeModal);
+      // close pop-over on events
+
     });
     $('.modal.button').click();
   });
