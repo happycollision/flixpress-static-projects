@@ -58,6 +58,9 @@
     if ($(clickedElement).data().modalContentName !== undefined){
       var contentName = $(clickedElement).data().modalContentName;
       return $('[data-modal-content-for="' + contentName + '"]').html();
+    } else if ($(clickedElement).data().modalContentAddress !== undefined){
+      var address = $(clickedElement).data().modalContentAddress;
+      return '<iframe src="'+ address +'"></iframe>';
     }
 
     return false;
