@@ -10,10 +10,12 @@
 
   $toolbar.hide();
   $closeButton.prependTo($toolbar);
-  $modalFull.append($modalContent).hide();
+  $modalFull.hide();
   $modalPartial.hide();
 
   function showModal(size, content){
+    var $thisModal = (size === 'full') ? $modalFull : $modalPartial;
+    
     if (content !== false){
       // TODO: add real content to pop-over
       $modalContent.html(content);      
@@ -21,36 +23,35 @@
       $modalContent.html("Content not found.");      
     }
 
+    $thisModal.append($modalContent);
+
     // Freeze body scrolling
     $('body').css({overflow: 'hidden'});
 
-    var whichModal;
     if (size === 'full') {
-      $modalFull.show('slide', {direction: 'down'}, function(){
+      $thisModal.show('slide', {direction: 'down'}, function(){
         $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
           }
         );
-      whichModal = $modalFull;
     } else {
-      $modalPartial.show('slide');
-      whichModal = $modalPartial;
+      $thisModal.show('slide');
     }
     
     // bind certain events to close the modal
     $('body').on('click.fpModalClose', '.flixpress-modal-close-button', closeModal);
     $(document).on('keyup.fpModalClose', function(e){
       if (e.which === 27){
-        closeModal(whichModal);
+        closeModal($thisModal);
       }
     });
   }
 
-  function closeModal(whichModal){
+  function closeModal($thisModal){
     // Allow body scrolling again
     $('body').css({overflow: 'auto'});
     
     // hide pop-over and toolbar
-    whichModal.hide('slide', {direction: 'down'});
+    $thisModal.hide('slide', {direction: 'down'});
     $toolbar.hide('slide', {direction: 'up'});
 
     //unbind the modal close event
