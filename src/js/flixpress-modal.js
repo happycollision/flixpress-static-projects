@@ -61,6 +61,8 @@
     } else if ($(clickedElement).data().modalContentAddress !== undefined){
       var address = $(clickedElement).data().modalContentAddress;
       return '<iframe src="'+ address +'"></iframe>';
+    } else if ($(clickedElement).data().modalContent !== undefined) {
+      return $(clickedElement).data().modalContent;
     }
 
     return false;
