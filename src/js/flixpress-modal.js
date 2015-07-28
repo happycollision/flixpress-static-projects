@@ -13,6 +13,30 @@
   $modalFull.hide();
   $modalPartial.hide();
 
+  function partialModalCss(properties){
+    // Possible Properties:
+    // `widthNum`, `widthPercent`, `heightNum`, `heightPercent`
+    // `marginTopNum`, `marginTopPercent`
+    // `marginSidesNum`, `marginSidesPercent`
+    // `maxMargin`, `minMargin`
+    // Pixels beat percentages
+
+
+    var defaults = {
+      minMargin: 12,
+      maxMargin: -1,
+      widthPercent: 80,
+      heightNum: -1,
+    };
+    var object = {
+      width: '80%',
+      height: 400,
+      marginLeft: '10%',
+      marginRight: '10%',
+    };
+    return object;
+  }
+
   function showModal(size, content){
     var $thisModal = (size === 'full') ? $modalFull : $modalPartial;
     
@@ -34,7 +58,7 @@
           }
         );
     } else {
-      $thisModal.show('slide');
+      $thisModal.css(partialModalCss()).show('slide');
     }
     
     // bind certain events to close the modal
