@@ -12,9 +12,12 @@
   $modalFull.append($modalContent).hide();
 
   function showModal(size, content){
-    
-    // TODO: add real content to pop-over
-    $modalContent.html(content);
+    if (content !== false){
+      // TODO: add real content to pop-over
+      $modalContent.html(content);      
+    } else {
+      $modalContent.html("Content not found.");      
+    }
 
     // Freeze body scrolling
     $('body').css({overflow: 'hidden'});
@@ -51,6 +54,15 @@
     $(document).off('.fpModalClose');
   }
 
+  function chooseContent (clickedElement) {
+    if ($(clickedElement).data().modalContentName !== undefined){
+      var contentName = $(clickedElement).data().modalContentName;
+      return $('[data-modal-content-for="' + contentName + '"]').html();
+    }
+
+    return false;
+  }
+
   $(document).ready(function(){
     // append to body ASAP, ready for action
     $modalFull.appendTo('body');
@@ -60,13 +72,15 @@
       // stop href from working
       e.preventDefault();
 
+      // choose content for modal
+      var content = chooseContent(this);
 
       // show pop-over
-      showModal('full', $('.modal-content').html());
+      showModal('full', content);
       // close pop-over on events
 
     });
-    $('.modal.button').click();
+    $('.modal.button:first').click();
   });
 
 })();

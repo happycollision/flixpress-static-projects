@@ -31,7 +31,9 @@
   </div>
 
  
-  <a class="modal full-modal button" href="http://google.com" data-template-number="23">Push me for modal</a> (wait until the page loads... see notes above)
+  <a class="modal full-modal button" href="http://google.com" data-template-number="23" data-modal-content-name="lorem">Push me for modal</a> (wait until the page loads... see notes above)
+  <br>
+  <a class="modal full-modal button" href="http://google.com" data-template-number="23" data-modal-content-name="alternate">Push me for modal</a> (wait until the page loads... see notes above)
 
   <div class="pricing">
 
@@ -441,7 +443,8 @@
     Explanation for the feature
   </div>
 
-<div class="modal-content">
+<div class="modal-content" data-modal-content-for="lorem">
+  <h3>You can close this by hitting the escape key, too</h3>
   <p style="margin-top:0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
@@ -465,6 +468,13 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
+</div>
+
+<div class="modal-content" data-modal-content-for="alternate">
+  <h3>This content is different</h3>
+</div>
+<div class="modal-content" data-modal-content-for="alternate">
+  <h3>This content is different 2</h3>
 </div>
 
 </div>
