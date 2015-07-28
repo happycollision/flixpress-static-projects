@@ -3,6 +3,7 @@
   // Do a little work as soon as possible (before page is done loading is fine):
 
   var $modalFull = $('<div class="flixpress-full-modal"></div>');
+  var $modalPartial = $('<div class="flixpress-partial-modal"></div>');
   var $modalContent = $('<div class="flixpress-modal-content"></div>');
   var $toolbar = $('<div class="flixpress-modal-toolbar"><img src="images/flix-gear.png" /></div>');
   var $closeButton = $('<div class="flixpress-modal-close-button">Close</div>');
@@ -10,6 +11,7 @@
   $toolbar.hide();
   $closeButton.prependTo($toolbar);
   $modalFull.append($modalContent).hide();
+  $modalPartial.hide();
 
   function showModal(size, content){
     if (content !== false){
@@ -22,32 +24,33 @@
     // Freeze body scrolling
     $('body').css({overflow: 'hidden'});
 
+    var whichModal;
     if (size === 'full') {
-    $modalFull.show('slide', {direction: 'down'}, function(){
-      $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
-        }
-      );
-
+      $modalFull.show('slide', {direction: 'down'}, function(){
+        $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
+          }
+        );
+      whichModal = $modalFull;
     } else {
-
+      $modalPartial.show('slide');
+      whichModal = $modalPartial;
     }
     
     // bind certain events to close the modal
     $('body').on('click.fpModalClose', '.flixpress-modal-close-button', closeModal);
     $(document).on('keyup.fpModalClose', function(e){
       if (e.which === 27){
-        closeModal();
-        //$(document).unbind('keyup');
+        closeModal(whichModal);
       }
     });
   }
 
-  function closeModal(){
+  function closeModal(whichModal){
     // Allow body scrolling again
     $('body').css({overflow: 'auto'});
     
     // hide pop-over and toolbar
-    $modalFull.hide('slide', {direction: 'down'});
+    whichModal.hide('slide', {direction: 'down'});
     $toolbar.hide('slide', {direction: 'up'});
 
     //unbind the modal close event
@@ -68,9 +71,18 @@
     return false;
   }
 
+  function chooseSize (clickedElement) {
+    if ($(clickedElement).hasClass('full-modal')){
+      return 'full';    
+    } else {
+      return 'partial';
+    }
+  }
+
   $(document).ready(function(){
     // append to body ASAP, ready for action
     $modalFull.appendTo('body');
+    $modalPartial.appendTo('body');
     $toolbar.appendTo('body');
 
     $('body').on('click', '.modal', function(e){
@@ -79,13 +91,13 @@
 
       // choose content for modal
       var content = chooseContent(this);
-
+      var size = chooseSize(this);
       // show pop-over
-      showModal('full', content);
+      showModal(size, content);
       // close pop-over on events
 
     });
-    $('.modal.button:first').click();
+    //$('.modal.button:last').click();
   });
 
 })();
