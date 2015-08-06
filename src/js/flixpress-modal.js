@@ -62,7 +62,9 @@
     }
     
     // bind certain events to close the modal
-    $('body').on('click.fpModalClose', '.flixpress-modal-close-button', closeModal);
+    $('body').on('click.fpModalClose', '.flixpress-modal-close-button', function(){
+      closeModal($thisModal)
+    });
     $(document).on('keyup.fpModalClose', function(e){
       if (e.which === 27){
         closeModal($thisModal);
