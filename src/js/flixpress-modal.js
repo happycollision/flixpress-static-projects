@@ -45,6 +45,10 @@
     return object;
   }
 
+  function modalSizeChange(properties){
+    $('.flixpress-partial-modal').animate(partialModalCss(properties));
+  }
+
   function showModal(size, content){
     var $thisModal = (size === 'full') ? $modalFull : $modalPartial;
     
@@ -135,4 +139,5 @@
     //$('.modal.button:last').click();
   });
 
+  window.flixpressModalSizeChange = modalSizeChange;
 })();

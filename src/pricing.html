@@ -41,7 +41,7 @@
   <br>
   <a class="modal full-modal button">Push me for modal</a> Content missing.
   <br>
-  <a class="modal button" data-modal-content="small content">Push me for small modal</a>
+  <a class="modal button" data-modal-content-name="small-content">Push me for small modal</a>
 
 
   <div class="pricing">
@@ -484,6 +484,18 @@
 </div>
 <div class="modal-content" data-modal-content-for="alternate">
   <h3>This content is different 2</h3>
+</div>
+
+<div class="modal-content" data-modal-content-for="small-content">
+  <h3>Content for the small modal</h3>
+  <div>If you want to change the size of this modal, pass in an object to <code>window.flixpressModalSizeChange()</code> with the <code>heightPercent</code> and/or the <code>widthPercent</code> as numbers. For example, the code below will run when you push the button below:</div>
+  <blockquote>
+    <pre><code>flixpressModalSizeChange({widthPercent: 50, heightPercent: 50})</code></pre>
+  </blockquote>
+
+  <div class="button" onClick="flixpressModalSizeChange({widthPercent: 50, heightPercent: 50})">
+    change size
+  </div>
 </div>
 
 </div>
