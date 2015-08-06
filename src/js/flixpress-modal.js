@@ -9,7 +9,7 @@
   var $closeButton = $('<div class="flixpress-modal-close-button">Close</div>');
 
   $toolbar.hide();
-  $closeButton.prependTo($toolbar);
+  $closeButton.prependTo($toolbar).clone().prependTo($modalPartial);
   $modalFull.hide();
   $modalPartial.hide();
 
