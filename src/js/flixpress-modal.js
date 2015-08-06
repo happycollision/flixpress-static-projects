@@ -78,10 +78,7 @@
     
     // bind certain events to close the modal
     $('body').on('click.fpModalClose', '.flixpress-modal-close-button', function(){
-      closeModal($thisModal)
-      $shade.animate({opacity: 0}, function(){
-        $(this).css({display: 'none'});
-      })
+      closeModal($thisModal);
     });
     $(document).on('keyup.fpModalClose', function(e){
       if (e.which === 27){
@@ -97,6 +94,9 @@
     // hide pop-over and toolbar
     $thisModal.hide('slide', {direction: 'down'});
     $toolbar.hide('slide', {direction: 'up'});
+    $shade.animate({opacity: 0}, function(){
+        $(this).css({display: 'none'});
+      });
 
     //unbind the modal close event
     $(document).off('.fpModalClose');
