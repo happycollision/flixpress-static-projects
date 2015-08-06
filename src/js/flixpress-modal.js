@@ -21,18 +21,26 @@
     // `maxMargin`, `minMargin`
     // Pixels beat percentages
 
+    // NOTE: only widthPercent and heightPercent are usable now
 
     var defaults = {
-      minMargin: 12,
-      maxMargin: -1,
+      //minMargin: 12,
+      //maxMargin: -1,
       widthPercent: 80,
-      heightNum: -1,
+      heightPercent: 80,
+      //heightNum: -1,
     };
+
+    $.extend(defaults,properties);
+
     var object = {
-      width: '80%',
-      height: 400,
-      marginLeft: '10%',
-      marginRight: '10%',
+      width: defaults.widthPercent+'%',
+      height: defaults.heightPercent+'%',
+      //height: 400,
+      marginLeft: (100 - defaults.widthPercent)/2 +'%',
+      marginRight: (100 - defaults.widthPercent)/2 +'%',
+      position: 'fixed',
+      top: (100 - defaults.heightPercent)/2 +'%', 
     };
     return object;
   }
