@@ -7,11 +7,13 @@
   var $modalContent = $('<div class="flixpress-modal-content"></div>');
   var $toolbar = $('<div class="flixpress-modal-toolbar"><img src="images/flix-gear.png" /></div>');
   var $closeButton = $('<div class="flixpress-modal-close-button">Close</div>');
+  var $shade = $('<div class="flixpress-shade"><div>');
 
   $toolbar.hide();
   $closeButton.prependTo($toolbar).clone().prependTo($modalPartial);
   $modalFull.hide();
   $modalPartial.hide();
+  $shade.css({display: 'none', opacity: 0}).appendTo('body');
 
   function partialModalCss(properties){
     // Possible Properties:
@@ -71,11 +73,15 @@
         );
     } else {
       $thisModal.css(partialModalCss()).show('slide');
+      $shade.css({display: 'block'}).animate({opacity: 0.85});
     }
     
     // bind certain events to close the modal
     $('body').on('click.fpModalClose', '.flixpress-modal-close-button', function(){
       closeModal($thisModal)
+      $shade.animate({opacity: 0}, function(){
+        $(this).css({display: 'none'});
+      })
     });
     $(document).on('keyup.fpModalClose', function(e){
       if (e.which === 27){
