@@ -55,7 +55,8 @@ body {
     background: #d4d4d4;
     color: white;
     cursor: pointer;
-    -webkit-font-smoothing: antialiased; }
+    -webkit-font-smoothing: antialiased;
+    display: none; }
   .pricing .price-block {
     background: #4B8E8B !important;
     color: white;
@@ -136,6 +137,17 @@ body {
       color: #4B8E8B; }
       .pricing .pricing-list .more-info:hover {
         background-color: #d4d4d4; }
+
+.explanations {
+  display: none; }
+
+.explain-div {
+  background-color: white;
+  width: 400px;
+  padding: 10px;
+  -webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+     -moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+          box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); }
 
 .flixpress-toolbar img {
   max-height: 100%; }
