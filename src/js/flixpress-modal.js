@@ -73,7 +73,7 @@
         );
     } else {
       $thisModal.css(partialModalCss()).show('slide');
-      $shade.css({display: 'block'}).animate({opacity: 0.85});
+      $shade.clone().appendTo('body').css({display: 'block'}).animate({opacity: 0.85});
     }
     
     // bind certain events to close the modal
@@ -94,8 +94,8 @@
     // hide pop-over and toolbar
     $thisModal.hide('slide', {direction: 'down'});
     $toolbar.hide('slide', {direction: 'up'});
-    $shade.animate({opacity: 0}, function(){
-        $(this).css({display: 'none'});
+    $('.flixpress-shade').animate({opacity: 0}, function(){
+        $(this).remove();
       });
 
     //unbind the modal close event
