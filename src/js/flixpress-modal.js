@@ -6,6 +6,7 @@
     toolbarImageSrc: 'images/flix-gear.png',
     preferredSize: 'partial',
     partialModalProperties: false, // use definititions below
+    automaticRunClassName: 'modal' // add this class to any element to run autmatically on load
   };
 
   $.flixpressModal = function (options) {
@@ -156,7 +157,7 @@
     $modalPartial.appendTo('body');
     $toolbar.appendTo('body');
 
-    $('body').on('click', '.modal', function(e){
+    $('body').on('click', '.' + fmo.automaticRunClassName, function(e){
       modalize(this, e);
     });
   });
