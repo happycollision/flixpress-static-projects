@@ -16,14 +16,17 @@
   };
 
   // Do a little work as soon as possible (before page is done loading is fine):
+  var $div = $('<div></div>');
+  var $modalFull = $div.clone().addClass(fmo.classNamePrefix + 'full');
+  var $modalPartial = $div.clone().addClass(fmo.classNamePrefix + 'partial');
+  var $modalContent = $div.clone().addClass(fmo.classNamePrefix + 'content');
+  var img = new Image();
+  img.src = fmo.toolbarImageSrc;
+  var $toolbar = $div.clone().addClass(fmo.classNamePrefix + 'toolbar').prepend(img);
+  var $closeButton = $div.clone().addClass(fmo.classNamePrefix + 'close-button').html('Close');
+  var $shade = $div.clone().addClass(fmo.classNamePrefix + 'shade');
 
-  var $modalFull = $('<div class="' + fmo.classNamePrefix + 'full"></div>');
-  var $modalPartial = $('<div class="' + fmo.classNamePrefix + 'partial"></div>');
-  var $modalContent = $('<div class="' + fmo.classNamePrefix + 'content"></div>');
-  var $toolbar = $('<div class="' + fmo.classNamePrefix + 'toolbar"><img src="'+ fmo.toolbarImageSrc + '" /></div>');
-  var $closeButton = $('<div class="' + fmo.classNamePrefix + 'close-button">Close</div>');
-  var $shade = $('<div class="' + fmo.classNamePrefix + 'shade"><div>');
-
+  
   $toolbar.hide();
   $closeButton.prependTo($toolbar).clone().prependTo($modalPartial);
   $modalFull.hide();
