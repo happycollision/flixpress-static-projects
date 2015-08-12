@@ -3,7 +3,8 @@
   // Flixpress Modal Options
   var fmo = {
     classNamePrefix: 'flixpress-modal-',
-    toolbarImageSrc: 'images/flix-gear.png'
+    toolbarImageSrc: 'images/flix-gear.png',
+    partialModalProperties: false, // use definititions below
   };
 
   // Do a little work as soon as possible (before page is done loading is fine):
@@ -39,7 +40,11 @@
       //heightNum: -1,
     };
 
-    $.extend(defaults,properties);
+    if (fmo.partialModalProperties !== false){
+      $.extend(defaults, fmo.partialModalProperties, properties);
+    } else {
+      $.extend(defaults, properties);      
+    }
 
     var object = {
       width: defaults.widthPercent+'%',
