@@ -17,23 +17,22 @@
 
   // Do a little work as soon as possible (before page is done loading is fine):
   var $div = $('<div></div>');
-  var $modalFull = $div.clone().addClass(fmo.classNamePrefix + 'full');
-  var $modalPartial = $div.clone().addClass(fmo.classNamePrefix + 'partial');
+  var $modal = $div.clone().addClass(fmo.classNamePrefix + 'main');
+  var $container = $div.clone().addClass(fmo.classNamePrefix + 'container');
   var $modalContent = $div.clone().addClass(fmo.classNamePrefix + 'content');
   var img = new Image();
   img.src = fmo.toolbarImageSrc;
-  var $toolbar = $div.clone().addClass(fmo.classNamePrefix + 'toolbar').prepend(img);
+  var $toolbar = $div.clone().addClass(fmo.classNamePrefix + 'toolbar').prepend(img).hide();
   var $closeButton = $div.clone().addClass(fmo.classNamePrefix + 'close-button').html('Close');
   var $shade = $div.clone().addClass(fmo.classNamePrefix + 'shade');
 
+  $modal.append($toolbar);
+  $container.append($modal);
   
-  $toolbar.hide();
-  $closeButton.prependTo($toolbar).clone().prependTo($modalPartial);
-  $modalFull.hide();
-  $modalPartial.hide();
+  $closeButton.prependTo($toolbar);
   $shade.css({display: 'none', opacity: 0}).appendTo('body');
 
-  function partialModalCss(properties){
+  function modalCss(properties){
     // Possible Properties:
     // `widthNum`, `widthPercent`, `heightNum`, `heightPercent`
     // `marginTopNum`, `marginTopPercent`
@@ -61,20 +60,22 @@
       width: defaults.widthPercent+'%',
       height: defaults.heightPercent+'%',
       //height: 400,
-      marginLeft: (100 - defaults.widthPercent)/2 +'%',
-      marginRight: (100 - defaults.widthPercent)/2 +'%',
+      //marginLeft: (100 - defaults.widthPercent)/2 +'%',
+      //marginRight: (100 - defaults.widthPercent)/2 +'%',
       position: 'fixed',
       top: (100 - defaults.heightPercent)/2 +'%', 
+      left: (100 - defaults.widthPercent)/2 +'%',
     };
+    console.log(object)
     return object;
   }
 
   function modalSizeChange(properties){
-    $('.' + fmo.classNamePrefix + 'partial').animate(partialModalCss(properties));
+    $container.animate(modalCss(properties));
   }
 
   function showModal(size, content){
-    var $thisModal = (size === 'full') ? $modalFull : $modalPartial;
+    var $thisModal = $modal;
     
     if (content !== false){
       // TODO: add real content to pop-over
@@ -87,16 +88,12 @@
 
     // Freeze body scrolling
     $('body').css({overflow: 'hidden'});
+    $container.css(modalCss()).show();
+    $thisModal.show('slide', function(){
+      $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
+    });
 
-    if (size === 'full') {
-      $thisModal.show('slide', {direction: 'down'}, function(){
-        $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
-          }
-        );
-    } else {
-      $thisModal.css(partialModalCss()).show('slide');
-      $shade.clone().appendTo('body').css({display: 'block'}).animate({opacity: 0.85});
-    }
+    $shade.clone().appendTo('body').css({display: 'block'}).animate({opacity: 0.85});
     
     // bind certain events to close the modal
     $('body').on('click.fpModalClose', '.' + fmo.classNamePrefix + 'close-button', function(){
@@ -114,7 +111,9 @@
     $('body').css({overflow: 'auto'});
     
     // hide pop-over and toolbar
-    $thisModal.hide('slide', {direction: 'down'});
+    $thisModal.hide('slide', {direction: 'down'}, function(){
+      $container.hide();
+    });
     $toolbar.hide('slide', {direction: 'up'});
     $('.' + fmo.classNamePrefix + 'shade').animate({opacity: 0}, function(){
         $(this).remove();
@@ -158,9 +157,7 @@
 
   $(document).ready(function(){
     // append to body ASAP, ready for action
-    $modalFull.appendTo('body');
-    $modalPartial.appendTo('body');
-    $toolbar.appendTo('body');
+    $container.appendTo('body');
 
     $('body').on('click', '.' + fmo.automaticRunClassName, function(e){
       modalize(this, e);
