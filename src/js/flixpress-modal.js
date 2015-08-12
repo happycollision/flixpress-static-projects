@@ -8,6 +8,10 @@
     partialModalProperties: false, // use definititions below
   };
 
+  $.flixpressModal = function (options) {
+    fmo = $.extend(fmo, options);
+  };
+
   // Do a little work as soon as possible (before page is done loading is fine):
 
   var $modalFull = $('<div class="' + fmo.classNamePrefix + 'full"></div>');
