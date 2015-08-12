@@ -1,4 +1,4 @@
-(function(){
+(function ($){
 
   // Do a little work as soon as possible (before page is done loading is fine):
 
@@ -124,6 +124,16 @@
     }
   }
 
+  function modalize (element, clickEvent) {
+    clickEvent.preventDefault();
+    // choose content for modal
+    var content = chooseContent(element);
+    var size = chooseSize(element);
+    // show pop-over
+    showModal(size, content);
+    // close pop-over on events
+  }
+
   $(document).ready(function(){
     // append to body ASAP, ready for action
     $modalFull.appendTo('body');
@@ -131,19 +141,19 @@
     $toolbar.appendTo('body');
 
     $('body').on('click', '.modal', function(e){
-      // stop href from working
-      e.preventDefault();
-
-      // choose content for modal
-      var content = chooseContent(this);
-      var size = chooseSize(this);
-      // show pop-over
-      showModal(size, content);
-      // close pop-over on events
-
+      modalize(this, e);
     });
-    //$('.modal.button:last').click();
   });
 
+  // register the above functionality as a jQuery Plugin
+  $.fn.flixpressModal = function () {
+    return this.each(function () {
+      // Do something to each selected element.
+      $(this).on('click', function(e){
+        modalize(this, e);
+      });
+    });
+  };
+
   window.flixpressModalSizeChange = modalSizeChange;
-})();
+})(jQuery);
