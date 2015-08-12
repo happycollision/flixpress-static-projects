@@ -5,8 +5,10 @@
     classNamePrefix: 'flixpress-modal-',
     toolbarImageSrc: 'images/flix-gear.png',
     preferredSize: 'partial',
+    alternateSizeClassName: 'full-modal',
     partialModalProperties: false, // use definititions below
-    automaticRunClassName: 'modal' // add this class to any element to run autmatically on load
+    automaticRunClassName: 'modal', // add this class to any element to run autmatically on load
+
   };
 
   $.flixpressModal = function (options) {
@@ -134,7 +136,7 @@
   }
 
   function chooseSize (clickedElement) {
-    if ($(clickedElement).hasClass('full-modal')){
+    if ($(clickedElement).hasClass(fmo.alternateSizeClassName)){
       return 'full';    
     } else {
       return fmo.preferredSize;
