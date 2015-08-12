@@ -2,7 +2,8 @@
 
   // Flixpress Modal Options
   var fmo = {
-    classNamePrefix: 'flixpress-modal-'
+    classNamePrefix: 'flixpress-modal-',
+    toolbarImageSrc: 'images/flix-gear.png'
   };
 
   // Do a little work as soon as possible (before page is done loading is fine):
@@ -10,7 +11,7 @@
   var $modalFull = $('<div class="' + fmo.classNamePrefix + 'full"></div>');
   var $modalPartial = $('<div class="' + fmo.classNamePrefix + 'partial"></div>');
   var $modalContent = $('<div class="' + fmo.classNamePrefix + 'content"></div>');
-  var $toolbar = $('<div class="' + fmo.classNamePrefix + 'toolbar"><img src="images/flix-gear.png" /></div>');
+  var $toolbar = $('<div class="' + fmo.classNamePrefix + 'toolbar"><img src="'+ fmo.toolbarImageSrc + '" /></div>');
   var $closeButton = $('<div class="' + fmo.classNamePrefix + 'close-button">Close</div>');
   var $shade = $('<div class="' + fmo.classNamePrefix + 'shade"><div>');
 
