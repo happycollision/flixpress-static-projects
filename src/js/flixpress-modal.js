@@ -4,6 +4,7 @@
   var fmo = {
     classNamePrefix: 'flixpress-modal-',
     toolbarImageSrc: 'images/flix-gear.png',
+    preferredSize: 'partial',
     partialModalProperties: false, // use definititions below
   };
 
@@ -131,7 +132,7 @@
     if ($(clickedElement).hasClass('full-modal')){
       return 'full';    
     } else {
-      return 'partial';
+      return fmo.preferredSize;
     }
   }
 
