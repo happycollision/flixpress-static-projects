@@ -1,13 +1,18 @@
 (function ($){
 
+  // Flixpress Modal Options
+  var fmo = {
+    classNamePrefix: 'flixpress-modal-'
+  };
+
   // Do a little work as soon as possible (before page is done loading is fine):
 
-  var $modalFull = $('<div class="flixpress-full-modal"></div>');
-  var $modalPartial = $('<div class="flixpress-partial-modal"></div>');
-  var $modalContent = $('<div class="flixpress-modal-content"></div>');
-  var $toolbar = $('<div class="flixpress-modal-toolbar"><img src="images/flix-gear.png" /></div>');
-  var $closeButton = $('<div class="flixpress-modal-close-button">Close</div>');
-  var $shade = $('<div class="flixpress-shade"><div>');
+  var $modalFull = $('<div class="' + fmo.classNamePrefix + 'full"></div>');
+  var $modalPartial = $('<div class="' + fmo.classNamePrefix + 'partial"></div>');
+  var $modalContent = $('<div class="' + fmo.classNamePrefix + 'content"></div>');
+  var $toolbar = $('<div class="' + fmo.classNamePrefix + 'toolbar"><img src="images/flix-gear.png" /></div>');
+  var $closeButton = $('<div class="' + fmo.classNamePrefix + 'close-button">Close</div>');
+  var $shade = $('<div class="' + fmo.classNamePrefix + 'shade"><div>');
 
   $toolbar.hide();
   $closeButton.prependTo($toolbar).clone().prependTo($modalPartial);
@@ -48,7 +53,7 @@
   }
 
   function modalSizeChange(properties){
-    $('.flixpress-partial-modal').animate(partialModalCss(properties));
+    $('.' + fmo.classNamePrefix + 'partial').animate(partialModalCss(properties));
   }
 
   function showModal(size, content){
@@ -77,7 +82,7 @@
     }
     
     // bind certain events to close the modal
-    $('body').on('click.fpModalClose', '.flixpress-modal-close-button', function(){
+    $('body').on('click.fpModalClose', '.' + fmo.classNamePrefix + 'close-button', function(){
       closeModal($thisModal);
     });
     $(document).on('keyup.fpModalClose', function(e){
@@ -94,7 +99,7 @@
     // hide pop-over and toolbar
     $thisModal.hide('slide', {direction: 'down'});
     $toolbar.hide('slide', {direction: 'up'});
-    $('.flixpress-shade').animate({opacity: 0}, function(){
+    $('.' + fmo.classNamePrefix + 'shade').animate({opacity: 0}, function(){
         $(this).remove();
       });
 
