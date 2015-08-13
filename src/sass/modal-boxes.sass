@@ -2,8 +2,9 @@
   box-sizing: border-box
   background-color: white
   height: 100%
-  scroll: auto
+  width: 100%
   padding: 10
+  padding-top: 51
   overflow: auto
   z-index: 1000
 
@@ -12,22 +13,8 @@
     height: 100%
     border: none
 
-.flixpress-modal-full
+.flixpress-modal-main
   @extend %flixpress-modal
-  width: 100%
-  position: fixed
-  top: 0
-  left: 0
-  padding-top: 51
-  border-top: 2px solid grey
-
-.flixpress-modal-partial
-  @extend %flixpress-modal
-  width: 80%
-  height: 80%
-  position: absolute
-  top: 0
-  left: 0
 
 .flixpress-modal-toolbar
   box-sizing: border-box
@@ -36,7 +23,7 @@
   padding: 5
   background-color: #eee
   border-bottom: 1px solid #ccc
-  position: fixed
+  position: absolute
   top: 0
   left: 0
   z-index: 1001
@@ -64,3 +51,9 @@
   left: 0
   right: 0
   background-color: black
+
+.flixpress-modal-container
+  display: block
+  height: 100%
+  width: 100%
+  z-index: 1000
