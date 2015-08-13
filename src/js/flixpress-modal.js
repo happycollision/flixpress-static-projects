@@ -11,43 +11,48 @@
 
   };
 
+  var $div, $modal, $container, $modalContent, img, $toolbar, $closeButton, $shade;
+
   $.flixpressModal = function (options) {
     fmo = $.extend(fmo, options);
+    
+    // Set all variables
+    $div = $('<div></div>');
+    $modal = $div.clone().addClass(fmo.classNamePrefix + 'main');
+    $container = $div.clone().addClass(fmo.classNamePrefix + 'container');
+    $modalContent = $div.clone().addClass(fmo.classNamePrefix + 'content');
+    img = new Image();
+    img.src = fmo.toolbarImageSrc;
+    $toolbar = $div.clone().addClass(fmo.classNamePrefix + 'toolbar').prepend(img).hide();
+    $closeButton = $div.clone().addClass(fmo.classNamePrefix + 'close-button').html('Close');
+    $shade = $div.clone().addClass(fmo.classNamePrefix + 'shade');
+
+    $modal.append($toolbar);
+    $container.append($modal);
+    $closeButton.prependTo($toolbar);
+    $shade.css({display: 'none', opacity: 0});
+    
+    window.flixpressModalSizeChange = modalSizeChange;
+
+    $(document).ready(function(){
+      $shade.appendTo('body');
+      $container.appendTo('body');
+
+      $('body').on('click', '.' + fmo.automaticRunClassName, function(e){
+        modalize(this, e);
+      });      
+    });
   };
 
   // Do a little work as soon as possible (before page is done loading is fine):
-  var $div = $('<div></div>');
-  var $modal = $div.clone().addClass(fmo.classNamePrefix + 'main');
-  var $container = $div.clone().addClass(fmo.classNamePrefix + 'container');
-  var $modalContent = $div.clone().addClass(fmo.classNamePrefix + 'content');
-  var img = new Image();
-  img.src = fmo.toolbarImageSrc;
-  var $toolbar = $div.clone().addClass(fmo.classNamePrefix + 'toolbar').prepend(img).hide();
-  var $closeButton = $div.clone().addClass(fmo.classNamePrefix + 'close-button').html('Close');
-  var $shade = $div.clone().addClass(fmo.classNamePrefix + 'shade');
-
-  $modal.append($toolbar);
-  $container.append($modal);
-  
-  $closeButton.prependTo($toolbar);
-  $shade.css({display: 'none', opacity: 0}).appendTo('body');
 
   function modalCss(properties){
     // Possible Properties:
-    // `widthNum`, `widthPercent`, `heightNum`, `heightPercent`
-    // `marginTopNum`, `marginTopPercent`
-    // `marginSidesNum`, `marginSidesPercent`
-    // `maxMargin`, `minMargin`
-    // Pixels beat percentages
-
-    // NOTE: only widthPercent and heightPercent are usable now
+    // `widthPercent`, `heightPercent`
 
     var defaults = {
-      //minMargin: 12,
-      //maxMargin: -1,
       widthPercent: 80,
       heightPercent: 80,
-      //heightNum: -1,
     };
 
     if (fmo.partialModalProperties !== false){
@@ -59,14 +64,10 @@
     var object = {
       width: defaults.widthPercent+'%',
       height: defaults.heightPercent+'%',
-      //height: 400,
-      //marginLeft: (100 - defaults.widthPercent)/2 +'%',
-      //marginRight: (100 - defaults.widthPercent)/2 +'%',
       position: 'fixed',
       top: (100 - defaults.heightPercent)/2 +'%', 
       left: (100 - defaults.widthPercent)/2 +'%',
     };
-    console.log(object)
     return object;
   }
 
@@ -75,21 +76,27 @@
   }
 
   function showModal(size, content){
-    var $thisModal = $modal;
-    
     if (content !== false){
-      // TODO: add real content to pop-over
       $modalContent.html(content);      
     } else {
       $modalContent.html("Content not found.");      
     }
 
-    $thisModal.append($modalContent);
+    $modal.append($modalContent);
+
+    // Prevents a bug where the first click is not animated
+    $modal.show().hide();
 
     // Freeze body scrolling
     $('body').css({overflow: 'hidden'});
-    $container.css(modalCss()).show();
-    $thisModal.show('slide', function(){
+    
+    if (size === 'full') {
+      $container.css(modalCss({widthPercent:100,heightPercent: 100})).show({duration: 0});    
+    } else {
+      $container.css(modalCss()).show({duration: 0});
+    }
+    
+    $modal.show('slide', {direction: 'down'}, function(){
       $toolbar.show('slide', {direction: 'up', easing: 'easeOutBounce', duration: 800});
     });
 
@@ -97,21 +104,21 @@
     
     // bind certain events to close the modal
     $('body').on('click.fpModalClose', '.' + fmo.classNamePrefix + 'close-button', function(){
-      closeModal($thisModal);
+      closeModal($modal);
     });
     $(document).on('keyup.fpModalClose', function(e){
       if (e.which === 27){
-        closeModal($thisModal);
+        closeModal($modal);
       }
     });
   }
 
-  function closeModal($thisModal){
+  function closeModal(){
     // Allow body scrolling again
     $('body').css({overflow: 'auto'});
     
     // hide pop-over and toolbar
-    $thisModal.hide('slide', {direction: 'down'}, function(){
+    $modal.hide('slide', {direction: 'down'}, function(){
       $container.hide();
     });
     $toolbar.hide('slide', {direction: 'up'});
@@ -155,15 +162,6 @@
     // close pop-over on events
   }
 
-  $(document).ready(function(){
-    // append to body ASAP, ready for action
-    $container.appendTo('body');
-
-    $('body').on('click', '.' + fmo.automaticRunClassName, function(e){
-      modalize(this, e);
-    });
-  });
-
   // register the above functionality as a jQuery Plugin
   $.fn.flixpressModal = function () {
     return this.each(function () {
@@ -174,5 +172,4 @@
     });
   };
 
-  window.flixpressModalSizeChange = modalSizeChange;
 })(jQuery);
