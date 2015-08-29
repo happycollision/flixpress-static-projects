@@ -1,0 +1,44 @@
+@import "breakpoint"
+
+$lg: 1200px
+$md: 992px
+$sm: 768px
+//$xs: 0
+
+.Header
+  .MenuButton
+    float: left
+
+    .navbar-toggle
+      padding: 8px
+      margin: 0
+
+  .account-login-register 
+    float: right
+    display: block
+    background-color: #d91b25
+    color: #fff
+    text-align: center
+    padding: 8px
+    
+    > span
+      margin-top: 6px
+      display: inline-block
+
+    +breakpoint($sm) 
+      border-bottom-left-radius: 7px
+      border-bottom-right-radius: 7px
+      padding: 15px 20px
+
+      > span
+        margin-top: 0
+
+    a,a:link,a:visited,a:hover 
+      color: #fff
+
+  .Header_bg 
+    #Logo
+      text-align: center
+
+      img
+        padding: 0
