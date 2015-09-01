@@ -1,0 +1,41 @@
+@import "base-includes"
+
+.notes
+  background-color: #feb
+  padding: 0.75em
+  line-height: 1.3
+
+  h3, ul
+    margin-top: 0
+    padding-top: 0
+    margin-bottom: 0
+    padding-bottom: 0
+
+  li
+    margin-top: 0.65em
+
+body
+  background: $body-color
+  font-family: arial
+
+  *
+    box-sizing: border-box
+
+
+.button
+  line-height: 1
+  color: white
+  background-color: $flixpress-red
+  display: inline-block
+  padding: 0.5em 0.75em
+  border-radius: 5px
+  margin: 3px auto
+  text-decoration: none
+
+  &:hover
+    background-color: lighten($flixpress-red, 10)
+
+
+.buy-now-button
+  @extend .button
+
