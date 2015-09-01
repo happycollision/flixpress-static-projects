@@ -12,7 +12,7 @@
 
 body {
   background: white;
-  font-family: arial; }
+  font-family: "Museo Sans", arial; }
   body * {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
@@ -21,7 +21,7 @@ body {
 .button, .buy-now-button {
   line-height: 1;
   color: white;
-  background-color: #C20016;
+  background-color: #d70000;
   display: inline-block;
   padding: 0.5em 0.75em;
   -moz-border-radius: 5px;
@@ -29,4 +29,4 @@ body {
   margin: 3px auto;
   text-decoration: none; }
   .button:hover, .buy-now-button:hover {
-    background-color: #f5001c; }
+    background-color: #ff0b0b; }

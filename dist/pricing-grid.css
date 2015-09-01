@@ -7,7 +7,7 @@
     font-size: 1.5em; }
   .pricing .feature, .pricing .pricing-list .more-info {
     color: #000;
-    background-color: #eee; }
+    background-color: rgba(123, 123, 123, 0); }
   .pricing .explainer {
     text-decoration: none;
     font-size: 0.75em;
@@ -20,13 +20,13 @@
     -moz-border-radius: 1em;
          border-radius: 1em;
     margin: 2px;
-    background: #d4d4d4;
-    color: white;
+    background: rgba(98, 98, 98, 0);
+    color: rgba(174, 174, 174, 0);
     cursor: pointer;
     -webkit-font-smoothing: antialiased;
     display: none; }
   .pricing .price-block {
-    background: #4B8E8B !important;
+    background: #d70000 !important;
     color: white;
     padding: 8px;
     -webkit-font-smoothing: antialiased; }
@@ -52,7 +52,7 @@
       .pricing .pricing-grid {
         font-size: 1em; } }
     .pricing .pricing-grid td {
-      background: #eee;
+      background: rgba(123, 123, 123, 0);
       width: 13.33%;
       padding: 8px 8px;
       line-height: 1; }
@@ -75,7 +75,7 @@
     padding-left: 0; }
     .pricing .pricing-list li, .pricing .pricing-list ul li {
       list-style: none;
-      background-color: #eee; }
+      background-color: rgba(123, 123, 123, 0); }
   .pricing .pricing-list {
     max-width: 445px;
     margin: auto; }
@@ -102,9 +102,9 @@
       display: none;
       cursor: pointer;
       text-decoration: underline;
-      color: #4B8E8B; }
+      color: #099db2; }
       .pricing .pricing-list .more-info:hover {
-        background-color: #d4d4d4; }
+        background-color: rgba(98, 98, 98, 0); }
 
 .explanations {
   display: none; }
