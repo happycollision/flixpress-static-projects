@@ -1,10 +1,12 @@
 .Header .MenuButton {
-  float: left; }
+  position: absolute; }
   .Header .MenuButton .navbar-toggle {
     padding: 8px;
     margin: 0; }
+@media (min-width: 0) and (max-width: 767px) {
+  .Header .login-wrapper {
+    padding: 0; } }
 .Header .account-login-register {
-  float: right;
   display: block;
   background-color: #d91b25;
   color: #fff;
@@ -15,6 +17,7 @@
     display: inline-block; }
   @media (min-width: 768px) {
     .Header .account-login-register {
+      float: right;
       -moz-border-radius-bottomleft: 7px;
            border-bottom-left-radius: 7px;
       -moz-border-radius-bottomright: 7px;

@@ -3,18 +3,20 @@
 $lg: 1200px
 $md: 992px
 $sm: 768px
-//$xs: 0
+$xs-only: (0 767px)
 
 .Header
   .MenuButton
-    float: left
+    position: absolute
 
     .navbar-toggle
       padding: 8px
       margin: 0
 
+  .login-wrapper
+    +breakpoint($xs-only)
+      padding: 0
   .account-login-register 
-    float: right
     display: block
     background-color: #d91b25
     color: #fff
@@ -26,6 +28,7 @@ $sm: 768px
       display: inline-block
 
     +breakpoint($sm) 
+      float: right
       border-bottom-left-radius: 7px
       border-bottom-right-radius: 7px
       padding: 15px 20px
