@@ -1,6 +1,6 @@
 @import "base-includes"
 
-$squares-color: rgba(123, 123, 123, 0)
+$squares-color: #fff
 $square-border: #ddd
 $show-table-size: 800px
 $feature-text-color: #000
@@ -101,6 +101,7 @@ $feature-text-color: #000
 
   .pricing-list, .pricing-list ul
     padding-left: 0
+    margin-left: 0
 
     li
       list-style: none
@@ -141,10 +142,14 @@ $feature-text-color: #000
       display: none
       cursor: pointer
       text-decoration: underline
-      color: $alt-color
+      //color: #fff
+      background-color: $squares-color
 
       &:hover
         background-color: darken($squares-color, 10)
+
+    .buy-now-button.btnRed
+      margin-top: 0 !important
 
 .explanations
   display: none
