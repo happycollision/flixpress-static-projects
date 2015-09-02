@@ -206,6 +206,51 @@ module.exports = function (grunt) {
     }
     grunt.task.run(['sass:dev', 'postcss:dev']);
   });
+
+  grunt.registerTask('sassTo', function (target){
+    var folder = grunt.option('folder');
+    if (folder === undefined){
+      grunt.fail.warn('`folder` was undefined. Add `--folder path/to/folder` to continue. Or force to store in `.tmp`');
+      folder = '.tmp/undefinedVariable';
+    }
+    var newPostcss = {
+      dist: {
+        options: {
+          processors: [
+            require('autoprefixer-core')({browsers: '> 0.05%'})
+          ],
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['.tmp/**/*.css'],
+          dest: folder
+        }]
+      },
+    };
+    var newWatch = {
+      sass: {
+        files: ['src/**/*.{sass,scss}'],
+        tasks: ['sass', 'postcss:dist'],
+        options: {
+          spawn: false,
+        },
+      }
+    };
+    
+    //grunt.log.writeln(JSON.stringify(newCopy, null, 4));
+    grunt.config.set('postcss',newPostcss);
+    grunt.config.set('watch',newWatch);
+    
+    grunt.event.on('watch', function(action, filepath) {
+      grunt.log.writeln(action + " " + filepath);
+      grunt.config('sass.dev.files.0.cwd', '.');
+      grunt.config('sass.dev.files.0.src', filepath);
+      grunt.log.writeln(JSON.stringify(grunt.config('sass.dev'), null, 4));
+    });
+
+    grunt.task.run(['clean:dev', 'watch']);
+  });
   // I'm not familiar with how testing works
   //grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
 };
