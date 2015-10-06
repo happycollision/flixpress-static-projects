@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="general-styles.css">
+    <link rel="stylesheet" href="sliding.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+  <div class="notes">
+    <h3>Notes:</h3>
+    <ul>
+    </ul>
+  </div>
+
+  <div class="info-sliders">
+    <div class="info-slider subject">
+      <h2>Subject Number 1</h2>
+    </div>
+    <div class="info-slider details">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
+    </div>
+    <div class="info-slider subject">
+      <h2>Subject Number 2</h2>
+    </div>
+    <div class="info-slider details">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
+    </div>
+    <div class="info-slider subject">
+      <h2>Subject Number 3</h2>
+    </div>
+    <div class="info-slider details">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
+    </div>
+  </div>
+
+  <div>
+    <h1>More things on the page</h1>
+  </div>
+
+  <script src="/jquery/jquery.min.js"></script>
+
+  <script>window.jQuery || document.write('<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"><\/script>')</script>
+
+  <script src="/jquery-ui/ui/core.js"></script>
+  <script src="/jquery-ui/ui/effect.js"></script>
+  <script src="/jquery-ui/ui/effect-slide.js"></script>
+
+  <script>window.jQuery.ui || document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"><\/script>')</script>
+
+  <script type="text/javascript">
+    
+
+function storeCss ($object, type) {
+  var css = {
+      positioning: ['top', 'left', 'position', 'height', 'width'],
+      visibility: ['opacity']
+    };
+  if (type === 'positioning') {
+    $object.css({
+      top: $object.position().top,
+      left: $object.position().left,
+    });
+  }
+  $object.data( type, $object.css(css[type]) );
+}
+
+function hideSiblings ($siblings, sibsReadyPromise) {
+  // Now we can safely start animating the clicked element
+  sibsReadyPromise.resolve();
+
+  // Step two
+  storeCss($siblings, 'visibility');
+  $siblings.animate({opacity: 0}, 250, 'linear');
+};
+
+function showSiblings ($siblings, sibsReadyPromise) {
+  $siblings.animate($siblings.data('visibility'), function(){
+    
+  });
+  sibsReadyPromise.resolve();
+}
+
+function makeActive (element){
+  var $el = $(element),
+    $sibs = $.Deferred();
+
+  $el.parent().css('height', $el.parent().css('height'));
+  
+  $el.parent().children()
+    .data('active', 'unavailable')
+    .each(function(){
+      storeCss($(this), 'positioning');
+    })
+    .css('position', 'absolute');
+  ;
+  
+  
+
+  // Start animating Siblings
+  hideSiblings($el.siblings(), $sibs);
+  $sibs.done(function(){
+    $el.animate({left: 0}, 800, 'easeOutCubic', function(){
+      $el.data('active', true);
+    });
+    
+  });
+}
+
+function makeInactive (element){
+  var $el = $(element),
+    $sibs = $.Deferred();
+
+  $el.data('active','unavailable');
+
+  $el.animate({left: $el.data('positioning').left});
+  showSiblings($el.siblings(), $sibs);
+
+  $sibs.done(function(){
+    $el.data('active', false);
+    $el.siblings().data('active', false);
+  });
+};
+
+$('.info-sliders .info-slider').data('active', false);
+$('.info-sliders .info-slider').on('click', function(){
+  if ($(this).data('active') === false) {
+    makeActive(this);
+  } else if ($(this).data('active') === true) {
+    makeInactive(this);
+  }
+});
+
+
+
+  </script>
+  </body>
+</html>
