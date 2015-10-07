@@ -12,7 +12,7 @@
     </ul>
   </div>
 
-  <div class="info-sliders">
+  <div class="info-sliders no-js">
     <div class="info-slider subject">
       <h2>Subject Number 1</h2>
     </div>
@@ -49,7 +49,7 @@
 
   <script type="text/javascript">
     
-
+(function () {
 function storeCss ($object, type) {
   var css = {
       positioning: ['top', 'left', 'position', 'height', 'width'],
@@ -142,17 +142,20 @@ function hideDetails ($el) {
 
 }
 
-$sliders = $('.info-sliders .info-slider');
+var $container = $('.info-sliders')
+var $sliders = $container.find('.info-slider');
+
+$container.removeClass('no-js').addClass('js');
 $sliders.data('active', false);
 $sliders.css('clear', 'none').filter('.details').css('display', 'none');
-$('.info-sliders').on('click', '.subject', function(){
+$container.on('click', '.subject', function(){
   if ($(this).data('active') === false) {
     makeActive(this);
   } else if ($(this).data('active') === true) {
     makeInactive(this);
   }
 });
-
+})()
 
 
   </script>

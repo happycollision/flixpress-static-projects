@@ -1,16 +1,45 @@
 @import 'compass/utilities/general/clearfix'
+@import 'base-includes'
 
 .info-sliders
+  &, & *
+    box-sizing: border-box
   +clearfix()
   position: relative
   width: 100%
-  border: 1px solid red
+  border: 10px solid red
+  .info-slider
+    padding: 1em
+
+    > :first-child
+      margin-top: 0
+
+.info-sliders.no-js
   .info-slider
     &.subject
       width: 33.33%
       float: left
       clear: left
-      border: 1px solid black
     &.details
       width: 66.66%
       float: left
+    +breakpoint($xs-only)
+      &.subject
+        text-align: center
+        width: 100%
+        padding-bottom: 0
+        margin-bottom: 0
+        > :last-child
+          margin-bottom: 0
+          padding-bottom: 0
+      &.details
+        width: 100%
+
+.info-sliders.js
+  .info-slider
+    &.subject
+      width: 33.33%
+      float: left
+      cursor: pointer
+    &.details
+      display: none
