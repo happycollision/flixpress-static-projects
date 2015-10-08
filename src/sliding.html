@@ -51,17 +51,23 @@
     
 (function () {
 function storeCss ($object, type) {
-  var css = {
+  var typesArray = {
       positioning: ['top', 'left', 'position', 'height', 'width'],
       visibility: ['opacity']
     };
+  var css = $object.css(typesArray[type]);
   if (type === 'positioning') {
     $object.css({
       top: $object.position().top,
       left: $object.position().left,
     });
+    
+    // Fixes a bug (?) in Safari...
+    css.top = $object.position().top;
+    css.left = $object.position().left;
   }
-  $object.data( type, $object.css(css[type]) );
+
+  $object.data( type, css );
 }
 
 function hideSiblings ($siblings, sibsReadyPromise) {
@@ -91,7 +97,7 @@ function makeActive (element){
     .each(function(){
       storeCss($(this), 'positioning');
     })
-    .css('position', 'absolute');
+    .css('position', 'absolute')
   ;
   
   
