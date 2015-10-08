@@ -38,8 +38,10 @@
     "gulp-compass": "^2.1.0",
     "gulp-load-plugins": "^0.10.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-sourcemaps": "^1.6.0",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^2.0.0",
+    "opn": "^3.0.2",
     "time-grunt": "^1.0.0"
   }
 }
