@@ -29,7 +29,7 @@ const reload = browserSync.reload;
 // const awsCredentials = aws;
 // const awsOptions = {uploadPath: "development_files/Scripts/flixpress-js/"}
 
-gulp.task('styles', () => {
+gulp.task('styles', (cb) => {
   return gulp.src('src/sass/*.{scss,sass}')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -44,6 +44,56 @@ gulp.task('styles', () => {
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/'))
     .pipe(reload({stream: true}));
+    cb(err);
+});
+
+function replaceOnDisk (begStr, endStr, insertFile, destFile, destDir) {
+  var beginningString = begStr || '/* Hi */';
+  var endingString = endStr || '/* There */';
+  var srcFile = destFile || '.tmp/dest.txt';
+  var insert; // becomes the inserted string later
+
+  if (srcFile === '.tmp/dest.txt'){
+    fs.writeFileSync('.tmp/dest.txt', beginningString + "\n\n" + endingString);
+  }
+  if (!insertFile){
+    fs.writeFileSync('.tmp/fake.txt', "\n Hello again \n");
+  }
+  insert = insertFile ? fs.readFileSync(insertFile) : fs.readFileSync('.tmp/fake.txt');
+
+
+  // keep destDir null if src and dest are the same
+  if (!destDir) {
+    destDir = srcFile.split('/').slice(0,-1).join('/');
+  }
+  // Auto escape literal strings
+  RegExp.quote = function(str) {
+    return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+  };
+  var beginningStringEsc = RegExp.quote(beginningString);
+  var endingStringEsc = RegExp.quote(endingString);
+
+  // RegExp created siwth strings need to escape all backslashes
+  // Hence the two slashes where you'd normally see one in the
+  // string below.
+  var regex2 = new RegExp(`${beginningStringEsc}([^]*)${endingStringEsc}`);
+  gulp.src(srcFile)
+    .pipe($.replace(regex2, (match, p1, offset, string) => {
+      return `${beginningString}\n\n${insert}\n\n${endingString}`;
+    }))
+    .pipe(gulp.dest(destDir))
+};
+
+gulp.task('replaceCssLive', ['styles'], () => {
+  replaceOnDisk(
+    '/* slider.css build:begin */',
+    '/* slider.css build:end */',
+    '.tmp/sliding.css',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+});
+
+gulp.task('localhost', () => {
+  gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive'])
 });
 
 // function lint(files, options) {
