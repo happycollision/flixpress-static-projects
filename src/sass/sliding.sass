@@ -9,7 +9,7 @@
   width: 100%
   border: 10px solid red
   .info-slider
-    padding: 1em
+    padding: 0.5em
 
     > :first-child
       margin-top: 0
@@ -17,7 +17,7 @@
 .info-sliders.no-js
   .info-slider
     &.subject
-      width: 33.33%
+      width: 31.33%
       float: left
       clear: left
     &.details
@@ -34,12 +34,26 @@
           padding-bottom: 0
       &.details
         width: 100%
+  a.no-click
+    display: none
 
 .info-sliders.js
   .info-slider
     &.subject
-      width: 33.33%
+      width: 32.33%
       float: left
       cursor: pointer
+      margin-left: 0.5%
+      margin-right: 0.5%
+
+      .subject-title
+        text-align: center
+        margin: 12px auto
     &.details
       display: none
+      padding-left: 2em
+      padding-right: 1em
+      > :first-child
+        margin-top: 0.75em
+  a.no-click
+    display: block

@@ -14,19 +14,40 @@
 
   <div class="info-sliders no-js">
     <div class="info-slider subject">
-      <h2>Subject Number 1</h2>
+      <h2 class="subject-title">Subject Number 1</h2>
+      <p>
+        Lookit all teh azaming things ewe can dew!
+      </p>
+      <p>
+        See it in action!
+      </p>
+      <a class="no-click" href="#">Learn More</a>
     </div>
     <div class="info-slider details">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus.</p>
     </div>
     <div class="info-slider subject">
-      <h2>Subject Number 2</h2>
+      <h2 class="subject-title">Subject Number 2</h2>
+      <p>
+        Lookit all teh azaming things ewe can dew!
+      </p>
+      <p>
+        See it in action!
+      </p>
+      <a class="no-click" href="#">Learn More</a>
     </div>
     <div class="info-slider details">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
     </div>
     <div class="info-slider subject">
-      <h2>Subject Number 3</h2>
+      <h2 class="subject-title">Subject Number 3</h2>
+      <p>
+        Lookit all teh azaming things ewe can dew!
+      </p>
+      <p>
+        See it in action!
+      </p>
+      <a class="no-click" href="#">Learn More</a>
     </div>
     <div class="info-slider details">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in enim ut ipsum volutpat tincidunt vitae sit amet tellus. Pellentesque congue dapibus sapien quis molestie. Suspendisse eget elit in odio sodales semper in tristique lectus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed porta malesuada consectetur. Curabitur non mi vitae lorem maximus consectetur id sit amet ex. Donec libero tortor, imperdiet quis ipsum et, sodales rutrum lacus. Nullam id turpis sed est porttitor laoreet id eget massa. Aliquam molestie nec arcu ac congue. Nunc eget venenatis tellus. Aliquam in elit egestas, finibus tellus non, sollicitudin ante.</p>
@@ -88,7 +109,8 @@ function showSiblings ($siblings, sibsReadyPromise) {
 
 function makeActive (element){
   var $el = $(element),
-    $sibs = $.Deferred();
+    $sibsProm = $.Deferred();
+    $elProm = $.Deferred();
 
   $el.parent().css('height', $el.parent().css('height'));
   
@@ -103,8 +125,8 @@ function makeActive (element){
   
 
   // Start animating Siblings
-  hideSiblings($el.siblings('.subject'), $sibs);
-  $sibs.done(function(){
+  hideSiblings($el.siblings('.subject'), $sibsProm);
+  $sibsProm.done(function(){
     showDetails($el);
     $el.animate({left: 0}, 800, 'easeOutCubic', function(){
       $el.data('active', true);
@@ -114,18 +136,26 @@ function makeActive (element){
 
 function makeInactive (element){
   var $el = $(element),
-    $sibs = $.Deferred();
+    $sibsProm = $.Deferred();
+    $elProm = $.Deferred();
 
   $el.data('active','unavailable');
 
   hideDetails($el);
 
-  $el.animate({left: $el.data('positioning').left});
-  showSiblings($el.siblings('.subject'), $sibs);
+  $el.animate($el.data('positioning'), function(){
+    $elProm.resolve()
+  });
 
-  $sibs.done(function(){
+  showSiblings($el.siblings('.subject'), $sibsProm);
+
+  $.when($elProm, $sibsProm).then(function(){
     $el.data('active', false);
     $el.siblings().data('active', false);
+    $el.parent().children('.subject').each(function(){
+      console.log($(this).data('positioning'))
+      $(this).css( $(this).data('positioning') );
+    })
   });
 };
 
@@ -166,7 +196,8 @@ var $sliders = $container.find('.info-slider.subject');
 $container.removeClass('no-js').addClass('js');
 $sliders.data('active', false);
 $sliders.css('clear', 'none').siblings().filter('.details').css('display', 'none');
-$container.on('click', '.subject', function(){
+$container.on('click', '.subject', function(e){
+  e.preventDefault(); // might be on a no-click link
   if ($(this).data('active') === false) {
     makeActive(this);
     resizeContainer($container)
@@ -175,7 +206,7 @@ $container.on('click', '.subject', function(){
     resizeContainer($container, $sliders)
   }
 });
-})()
+})//()
 
 
   </script>
