@@ -50,6 +50,10 @@ function makeActive (element){
       storeCss($(this), 'positioning');
     })
     .css('position', 'absolute')
+    .parent() //// ! Scope Change
+    .css({paddingLeft: ($el.outerWidth(true) / $el.parent().innerWidth() * 100) + '%'})
+    .children('.details') //// ! Scope Change
+    .css('width', '100%')
   ;
   
   
@@ -82,19 +86,20 @@ function makeInactive (element){
   $.when($elProm, $sibsProm).then(function(){
     $el.data('active', false);
     $el.siblings().data('active', false);
-    $el.parent().children('.subject').each(function(){
-      console.log($(this).data('positioning'))
-      $(this).css( $(this).data('positioning') );
-    })
+    $el.parent()
+      .css('padding-left',0)
+      .children('.subject') //// ! Scope Change
+      .each(function(){
+        $(this).css( $(this).data('positioning') );
+      })
+    ;
   });
 };
 
 function showDetails ($el) {
   $el.next('.info-slider.details').css({
-    width: $el.parent().innerWidth() - $el.outerWidth(),
     top: $el.position().top,
     left: $el.outerWidth(),
-    position: 'absolute',
     display: 'block',
     opacity: 0
   }).animate({opacity: 1});
@@ -115,11 +120,16 @@ function resizeContainer($el, $children) {
   }
 
   $children.each(function(){
-    var tempHeight = $(this).outerHeight();
+    var tempHeight = $(this).outerHeight(true);
     maxHeight = (maxHeight < tempHeight) ? tempHeight : maxHeight ;
   });
   var elPadding = $el.outerHeight() - $el.innerHeight();
-  $el.animate({height: maxHeight + elPadding});
+  $el.animate({height: maxHeight + elPadding}, function(){
+    $el.css({
+      height: 'auto',
+      minHeight: $el.children().filter('.subject:visible').outerHeight(true)
+    });
+  });
 }
 
 var $container = $('.info-sliders')
