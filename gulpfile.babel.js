@@ -77,11 +77,11 @@ function replaceOnDisk (begStr, endStr, insertFile, destFile, destDir) {
   // Hence the two slashes where you'd normally see one in the
   // string below.
   var regex2 = new RegExp(`${beginningStringEsc}([^]*)${endingStringEsc}`);
-  gulp.src(srcFile)
+  return gulp.src(srcFile)
     .pipe($.replace(regex2, (match, p1, offset, string) => {
       return `${beginningString}\n\n${insert}\n\n${endingString}`;
     }))
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(destDir));
 };
 
 gulp.task('replaceCssLive', ['styles'], () => {
@@ -92,8 +92,26 @@ gulp.task('replaceCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
+gulp.task('replaceHtmlLive', () => {
+  replaceOnDisk(
+    '<!-- slider.html build:begin -->',
+    '<!-- slider.html build:end -->',
+    'src/_sliding-part.html',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/HomePage.ascx');
+});
+
+gulp.task('replaceJsLive', () => {
+  replaceOnDisk(
+    '<!-- slider.js build:begin -->',
+    '<!-- slider.js build:end -->',
+    'src/_sliding-part-js.html',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/HomePage.ascx');
+});
+
 gulp.task('localhost', () => {
   gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive'])
+  gulp.watch('src/_sliding-part.html', ['replaceHtmlLive'])
+  gulp.watch('src/_sliding-part-js.html', ['replaceJsLive'])
 });
 
 // function lint(files, options) {

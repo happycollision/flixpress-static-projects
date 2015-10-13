@@ -1,0 +1,141 @@
+  <script type="text/javascript">
+    
+(function () {
+function storeCss ($object, type) {
+  var typesArray = {
+      positioning: ['top', 'left', 'position', 'height', 'width'],
+      visibility: ['opacity']
+    };
+  var css = $object.css(typesArray[type]);
+  if (type === 'positioning') {
+    $object.css({
+      top: $object.position().top,
+      left: $object.position().left,
+    });
+    
+    // Fixes a bug (?) in Safari...
+    css.top = $object.position().top;
+    css.left = $object.position().left;
+  }
+
+  $object.data( type, css );
+}
+
+function hideSiblings ($siblings, sibsReadyPromise) {
+  // Now we can safely start animating the clicked element
+  sibsReadyPromise.resolve();
+
+  // Step two
+  storeCss($siblings, 'visibility');
+  $siblings.animate({opacity: 0}, 250, 'linear');
+};
+
+function showSiblings ($siblings, sibsReadyPromise) {
+  $siblings.animate($siblings.data('visibility'), function(){
+    
+  });
+  sibsReadyPromise.resolve();
+}
+
+function makeActive (element){
+  var $el = $(element),
+    $sibsProm = $.Deferred();
+    $elProm = $.Deferred();
+
+  $el.parent().css('height', $el.parent().css('height'));
+  
+  $el.parent().children('.subject')
+    .data('active', 'unavailable')
+    .each(function(){
+      storeCss($(this), 'positioning');
+    })
+    .css('position', 'absolute')
+  ;
+  
+  
+
+  // Start animating Siblings
+  hideSiblings($el.siblings('.subject'), $sibsProm);
+  $sibsProm.done(function(){
+    showDetails($el);
+    $el.animate({left: 0}, 800, 'easeOutCubic', function(){
+      $el.data('active', true);
+    });    
+  });
+}
+
+function makeInactive (element){
+  var $el = $(element),
+    $sibsProm = $.Deferred();
+    $elProm = $.Deferred();
+
+  $el.data('active','unavailable');
+
+  hideDetails($el);
+
+  $el.animate($el.data('positioning'), function(){
+    $elProm.resolve()
+  });
+
+  showSiblings($el.siblings('.subject'), $sibsProm);
+
+  $.when($elProm, $sibsProm).then(function(){
+    $el.data('active', false);
+    $el.siblings().data('active', false);
+    $el.parent().children('.subject').each(function(){
+      console.log($(this).data('positioning'))
+      $(this).css( $(this).data('positioning') );
+    })
+  });
+};
+
+function showDetails ($el) {
+  $el.next('.info-slider.details').css({
+    width: $el.parent().innerWidth() - $el.outerWidth(),
+    top: $el.position().top,
+    left: $el.outerWidth(),
+    position: 'absolute',
+    display: 'block',
+    opacity: 0
+  }).animate({opacity: 1});
+
+}
+function hideDetails ($el) {
+  $el.next('.info-slider.details').animate({opacity: 0}, function(){
+    $(this).css('display', 'none');
+  });
+}
+
+function resizeContainer($el, $children) {
+  var maxHeight = 0;
+  if ($children === undefined) {
+    $children = $el.children().filter(':visible');
+  }
+
+  $children.each(function(){
+    var tempHeight = $(this).outerHeight();
+    maxHeight = (maxHeight < tempHeight) ? tempHeight : maxHeight ;
+  });
+  var elPadding = $el.outerHeight() - $el.innerHeight();
+  $el.animate({height: maxHeight + elPadding});
+}
+
+var $container = $('.info-sliders')
+var $sliders = $container.find('.info-slider.subject');
+
+$container.removeClass('no-js').addClass('js');
+$sliders.data('active', false);
+$sliders.css('clear', 'none').siblings().filter('.details').css('display', 'none');
+$container.on('click', '.subject', function(e){
+  e.preventDefault(); // might be on a no-click link
+  if ($(this).data('active') === false) {
+    makeActive(this);
+    resizeContainer($container)
+  } else if ($(this).data('active') === true) {
+    makeInactive(this);
+    resizeContainer($container, $sliders)
+  }
+});
+})()
+
+</script>
