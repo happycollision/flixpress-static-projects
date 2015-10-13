@@ -103,14 +103,11 @@ function showDetails ($el) {
     display: 'block',
     opacity: 0
   }).animate({opacity: 1});
-  $el.find('a').animate({opacity: 0});
-
 }
 function hideDetails ($el) {
   $el.next('.info-slider.details').animate({opacity: 0}, function(){
     $(this).css('display', 'none');
   });
-  $el.find('a').animate({opacity: 1});
 }
 
 function resizeContainer($el, $children) {
