@@ -84,6 +84,16 @@ function replaceOnDisk (begStr, endStr, insertFile, destFile, destDir) {
     .pipe(gulp.dest(destDir));
 };
 
+// Plan Slider stuff
+gulp.task('replacePlanCssLive', ['styles'], () => {
+  replaceOnDisk(
+    '/* plan-slider.css build:begin */',
+    '/* plan-slider.css build:end */',
+    '.tmp/plan-slider.css',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+});
+
+// Info sliders stuff
 gulp.task('replaceCssLive', ['styles'], () => {
   replaceOnDisk(
     '/* slider.css build:begin */',
@@ -109,9 +119,10 @@ gulp.task('replaceJsLive', () => {
 });
 
 gulp.task('localhost', () => {
-  gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive'])
-  gulp.watch('src/_sliding-part.html', ['replaceHtmlLive'])
-  gulp.watch('src/_sliding-part-js.html', ['replaceJsLive'])
+  gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive'])
+  // gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive'])
+  // gulp.watch('src/_sliding-part.html', ['replaceHtmlLive'])
+  // gulp.watch('src/_sliding-part-js.html', ['replaceJsLive'])
 });
 
 // function lint(files, options) {
