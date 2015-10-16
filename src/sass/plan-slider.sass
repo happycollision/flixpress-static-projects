@@ -73,9 +73,28 @@
         font-size: 18px
         margin-top: 24px
         padding: 0 8%
+      
       .plan-items
         width: 100%
         clear: both
         text-align: center
+        .pay-period-switcher
+          border-top: 1px solid #aaa
+          span
+            display: inline-block
+            border-radius: 3px
+            overflow: hidden
+            border: 1px solid #099DB2
+            margin: 4px auto
+          a
+            background: #fff
+            color: #099DB2
+            padding: 3px 5px
+            cursor: pointer
+
+            &.active
+              background-color: #099DB2
+              color: #fff
+
   a.no-click
     display: block
