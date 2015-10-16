@@ -46,15 +46,36 @@
       margin-left: 0.5%
       margin-right: 0.5%
       text-align: center
+      border: 1px solid #ddd
+      background-color: #fff
+      box-shadow: 4px 4px 8px #eee
 
       .subject-title
         text-align: center
         margin: 12px auto
+        position: relative
+      .deal-tag
+        top: auto
+        bottom: -90px
+        left: 10px
     &.details
       display: none
       padding-left: 2em
       padding-right: 1em
-      > :first-child
-        margin-top: 0.75em
+      .placeholder
+        width: 33.33%
+        height: auto // Will be determined in js
+        float: left
+      .description
+        width: 66.66%
+        height: auto
+        float: left
+        font-size: 18px
+        margin-top: 24px
+        padding: 0 8%
+      .plan-items
+        width: 100%
+        clear: both
+        text-align: center
   a.no-click
     display: block
