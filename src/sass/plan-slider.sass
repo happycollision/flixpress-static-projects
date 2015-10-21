@@ -79,30 +79,6 @@
         clear: both
         text-align: center
         margin-top: 25px
-        .pay-period-switcher
-          border-top: 1px solid #aaa
-          span
-            display: inline-block
-            border-radius: 3px
-            overflow: hidden
-            border: 1px solid $flixpress-red
-            margin: 4px auto
-          a
-            background: #fff
-            color: $flixpress-red
-            padding: 3px 5px
-            cursor: pointer
-            transition: none
-
-            &.active, &.active:hover
-              background-color: $flixpress-red
-              color: #fff
-              cursor: default
-            
-            &:hover
-              background-color: $flixpress-blue
-              color: #fff
-
         .credits-applied
           ul
             margin: 0
@@ -158,3 +134,27 @@
         background-color: $flixpress-red
         color: #fff
         cursor: default
+
+.pay-period-switcher
+  border-top: 1px solid #aaa
+  span
+    display: inline-block
+    border-radius: 3px
+    overflow: hidden
+    border: 1px solid $flixpress-red
+    margin: 4px auto
+  a
+    background: #fff
+    color: $flixpress-red
+    padding: 3px 5px
+    cursor: pointer
+    transition: none
+
+    &.active, &.active:hover
+      background-color: $flixpress-red
+      color: #fff
+      cursor: default
+    
+    &:hover
+      background-color: $flixpress-blue
+      color: #fff
