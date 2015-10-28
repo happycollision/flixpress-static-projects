@@ -93,6 +93,15 @@ gulp.task('replacePlanCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
+// Plan Slider stuff
+gulp.task('replaceIncentiveCssLive', ['styles'], () => {
+  replaceOnDisk(
+    '/* incentives.css build:begin */',
+    '/* incentives.css build:end */',
+    '.tmp/incentives.css',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+});
+
 // Info sliders stuff
 gulp.task('replaceCssLive', ['styles'], () => {
   replaceOnDisk(
@@ -119,10 +128,11 @@ gulp.task('replaceJsLive', () => {
 });
 
 gulp.task('localhost', () => {
-  gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive'])
-  // gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive'])
-  // gulp.watch('src/_sliding-part.html', ['replaceHtmlLive'])
-  // gulp.watch('src/_sliding-part-js.html', ['replaceJsLive'])
+  gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive']);
+  // gulp.watch('src/_sliding-part.html', ['replaceHtmlLive']);
+  // gulp.watch('src/_sliding-part-js.html', ['replaceJsLive']);
 });
 
 // function lint(files, options) {
