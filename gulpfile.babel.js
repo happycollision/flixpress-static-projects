@@ -39,12 +39,11 @@ gulp.task('styles', (cb) => {
       css: '.tmp/.css',
       sass: 'src/sass',
       require: ['susy','breakpoint']
-    }).on('error', function(err){}))
+    }).on('error', function(err){cb(err);}))
     .pipe($.autoprefixer({browsers: ['last 10 versions']}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/'))
     .pipe(reload({stream: true}));
-    cb(err);
 });
 
 function replaceOnDisk (begStr, endStr, insertFile, destFile, destDir) {
