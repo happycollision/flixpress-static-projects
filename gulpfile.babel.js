@@ -110,6 +110,15 @@ gulp.task('replacePricingCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/pricing-grid.css');
 });
 
+// template browser css stuff
+gulp.task('replaceTemplateBrowserCssLive', ['styles'], () => {
+  replaceOnDisk(
+    '/* template-browser.css build:begin */',
+    '/* template-browser.css build:end */',
+    '.tmp/template-browser.css',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+});
+
 // Info sliders stuff
 gulp.task('replaceCssLive', ['styles'], () => {
   replaceOnDisk(
@@ -136,7 +145,8 @@ gulp.task('replaceJsLive', () => {
 });
 
 gulp.task('localhost', () => {
-  gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
+  gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive']);
