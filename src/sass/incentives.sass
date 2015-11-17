@@ -1,0 +1,86 @@
+@import 'compass/utilities/general/clearfix'
+@import 'base-includes'
+
+$nothing: #ccc
+$personal: $flixpress-blue
+$expert: $flixpress-red
+$business: green
+$enterprise: purple
+
+@keyframes sizepulse
+  0%, 100%
+    transform: scale(1)
+  50%
+    transform: scale(1.2)
+
+=pulse
+  animation: sizepulse 1s ease
+
+
+.incentive-page
+
+  .months-container
+    .month
+      float: left
+      width: (100%) / 3
+      padding: 4px
+      text-transform: capitalize
+      text-align: center
+      background-color: #ddd
+      margin: 6px auto
+
+      .month-label
+        color: #222
+        line-height: 1.2
+        height: 2em * 1.2
+      .value
+        background-color: $nothing
+        width: 100%
+        //height: 40px
+        border-radius: 5px
+        color: #eee
+        font-weight: bold
+        white-space: pre // allows \A to work below
+        line-height: 1
+        padding: 6px 2px
+        transition: background-color 1s ease
+
+        &.no-plan:after
+          content: 'nothing\A earned'
+          color: darken($nothing,20)
+          font-weight: normal
+        &.personal
+          +pulse
+          background-color: $personal
+          &:after
+            content: 'personal\Aplan'
+        &.expert
+          +pulse
+          background-color: $expert
+          &:after
+            content: 'expert\Aplan'
+        &.business
+          +pulse
+          background-color: $business
+          &:after
+            content: 'business\Aplan'
+        &.enterprise
+          +pulse
+          background-color: $enterprise
+          // transform: scale(2)
+          &:after
+            content: 'enterprise\Aplan'
+
+    +breakpoint(550px)
+      .month
+        width: (100%) / 4
+    +breakpoint($sm)
+      .month
+        width: (100%) / 6
+    +breakpoint($md)
+      .month
+        width: (100%) / 12
+        font-size: 0.85em
+    +breakpoint($lg)
+      .month
+        font-size: 1em
