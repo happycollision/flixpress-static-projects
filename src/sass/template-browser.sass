@@ -1,25 +1,30 @@
 @import "base-includes"
 
 .browserItem
+  position: relative
+
   &.TryIt
-    position: relative
-    overflow: hidden
-    
-    &:before
-      background-color: $flixpress-blue
-      overflow: hidden
-      white-space: nowrap
-      /* top left corner */
+    .ribbon-placeholder
       position: absolute
-      left: -2.15em
-      top: 0.5em
-      /* 45 deg ccw rotation */
-      transform: rotate(-45deg)
-      /* shadow */
-      box-shadow: 0 0 5px rgba(0,0,0,0.8)
-      content: 'Trial'
-      color: #fff
-      z-index: 1
-      padding: 2px 2.5em
-      letter-spacing: 0.05em
-      font-weight: bold
+      width: 100%
+      height: 100%
+      overflow: hidden
+
+      &:before
+        background-color: $flixpress-blue
+        overflow: hidden
+        white-space: nowrap
+        /* top left corner */
+        position: absolute
+        left: -2.15em
+        top: 0.5em
+        /* 45 deg ccw rotation */
+        transform: rotate(-45deg)
+        /* shadow */
+        box-shadow: 0 0 5px rgba(0,0,0,0.8)
+        content: 'Trial'
+        color: #fff
+        z-index: 1
+        padding: 2px 2.5em
+        letter-spacing: 0.05em
+        font-weight: bold
