@@ -92,7 +92,7 @@ gulp.task('replacePlanCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
-// Plan Slider stuff
+// incentive stuff
 gulp.task('replaceIncentiveCssLive', ['styles'], () => {
   replaceOnDisk(
     '/* incentives.css build:begin */',
@@ -145,9 +145,9 @@ gulp.task('replaceJsLive', () => {
 });
 
 gulp.task('localhost', () => {
-  gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
-  // gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
+  gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive']);
   // gulp.watch('src/_sliding-part.html', ['replaceHtmlLive']);
