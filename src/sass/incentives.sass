@@ -20,6 +20,7 @@ $enterprise: purple
 .incentive-page
 
   .months-container
+    +pie-clearfix
     .month
       float: left
       width: (100%) / 3
@@ -84,16 +85,29 @@ $enterprise: purple
     +breakpoint($lg)
       .month
         font-size: 1em
+  
   .option
     margin-bottom: 3px
     padding: 0.75em 1em
     background-color: #eee
-    .explainer
-      padding-left: 1em
-      color: #777
-      font-size: 0.9em
+
+  .explainer
+    padding-left: 1em
+    color: #777
+    font-size: 0.9em
+  
   .rewards-table
     td, th
       padding: 6px
     th
       background-color: #ddd
+  
+  .points, .referral, .earned-months
+    h4, h3
+      font-size: 3em
+    .options
+      h4
+        font-size: 1.5em
+  
+  .how-it-works, .rewards-table
+    margin-top: 6em
