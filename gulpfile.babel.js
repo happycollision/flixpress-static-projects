@@ -150,8 +150,12 @@ gulp.task('localhost', () => {
   gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
   gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
   gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive']);
-  // gulp.watch('src/_sliding-part.html', ['replaceHtmlLive']);
-  // gulp.watch('src/_sliding-part-js.html', ['replaceJsLive']);
+  
+  // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
+  // Do not update here without pulling in the changes.
+  // (The build tags were removed on the server, too, to avoid issues.)
+  //// gulp.watch('src/_sliding-part.html', ['replaceHtmlLive']);
+  //// gulp.watch('src/_sliding-part-js.html', ['replaceJsLive']);
 });
 
 // function lint(files, options) {
