@@ -145,10 +145,10 @@ gulp.task('replaceSliderJsLive', () => {
 });
 
 gulp.task('localhost', () => {
-  gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
-  gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
-  gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
-  gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
   gulp.watch('src/sass/*.{scss,sass}', ['replaceSliderCssLive']);
   
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.

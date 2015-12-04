@@ -13,6 +13,18 @@
 
     > :first-child
       margin-top: 0
+      
+    &.details
+      +clearfix
+      .features-list, .description
+        margin-top: 0.75em
+        font-size: 1.3em
+      .features-list
+        ul
+          padding: 0
+          li
+            padding: 0.25em 0
+      .description  
 
 .info-sliders.no-js
   .info-slider
@@ -54,7 +66,5 @@
       display: none
       padding-left: 2em
       padding-right: 1em
-      > :first-child
-        margin-top: 0.75em
   a.no-click
     display: block
