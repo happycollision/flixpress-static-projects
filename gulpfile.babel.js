@@ -145,11 +145,11 @@ gulp.task('replaceJsLive', () => {
 });
 
 gulp.task('localhost', () => {
-  // gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
-  // gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
+  gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
+  gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
   gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
-  // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
-  // gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive']);
+  gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
+  gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive']);
   // gulp.watch('src/_sliding-part.html', ['replaceHtmlLive']);
   // gulp.watch('src/_sliding-part-js.html', ['replaceJsLive']);
 });
