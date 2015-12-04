@@ -120,7 +120,7 @@ gulp.task('replaceTemplateBrowserCssLive', ['styles'], () => {
 });
 
 // Info sliders stuff
-gulp.task('replaceCssLive', ['styles'], () => {
+gulp.task('replaceSliderCssLive', ['styles'], () => {
   replaceOnDisk(
     '/* slider.css build:begin */',
     '/* slider.css build:end */',
@@ -128,7 +128,7 @@ gulp.task('replaceCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
-gulp.task('replaceHtmlLive', () => {
+gulp.task('replaceSliderHtmlLive', () => {
   replaceOnDisk(
     '<!-- slider.html build:begin -->',
     '<!-- slider.html build:end -->',
@@ -136,7 +136,7 @@ gulp.task('replaceHtmlLive', () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/HomePage.ascx');
 });
 
-gulp.task('replaceJsLive', () => {
+gulp.task('replaceSliderJsLive', () => {
   replaceOnDisk(
     '<!-- slider.js build:begin -->',
     '<!-- slider.js build:end -->',
@@ -149,13 +149,13 @@ gulp.task('localhost', () => {
   gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
   gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
   gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
-  gulp.watch('src/sass/*.{scss,sass}', ['replaceCssLive']);
+  gulp.watch('src/sass/*.{scss,sass}', ['replaceSliderCssLive']);
   
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
   // Do not update here without pulling in the changes.
   // (The build tags were removed on the server, too, to avoid issues.)
-  //// gulp.watch('src/_sliding-part.html', ['replaceHtmlLive']);
-  //// gulp.watch('src/_sliding-part-js.html', ['replaceJsLive']);
+  //// gulp.watch('src/_sliding-part.html', ['replaceSliderHtmlLive']);
+  //// gulp.watch('src/_sliding-part-js.html', ['replaceSliderJsLive']);
 });
 
 // function lint(files, options) {
