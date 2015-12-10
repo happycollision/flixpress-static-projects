@@ -7,6 +7,9 @@ $expert: $flixpress-red
 $business: green
 $enterprise: purple
 
+$top-space: 54px
+$border-width: 6px
+
 @keyframes sizepulse
   0%, 100%
     transform: scale(1)
@@ -20,14 +23,16 @@ $enterprise: purple
 .incentive-page
 
   .months-container
+    background-color: #ddd
     +pie-clearfix
+    margin-bottom: $border-width
+    padding: 4px
     .month
       float: left
       width: (100%) / 3
       padding: 4px
       text-transform: capitalize
       text-align: center
-      background-color: #ddd
       margin: 6px auto
 
       .month-label
@@ -87,7 +92,7 @@ $enterprise: purple
         font-size: 1em
   
   .option
-    margin-bottom: 3px
+    margin-bottom: $border-width
     padding: 0.75em 1em
     background-color: #eee
 
@@ -97,6 +102,10 @@ $enterprise: purple
     font-size: 0.9em
   
   .rewards-table
+    margin-top: $top-space
+    
+    table
+      width: 100%
     td, th
       padding: 6px
     th
@@ -105,15 +114,32 @@ $enterprise: purple
   .points, .referral, .earned-months
     h4, h3
       font-size: 3em
-    .options
-      h4
-        font-size: 1.5em
-  
-  .how-it-works, .rewards-table
-    margin-top: 6em
+      
+  .earning-points  
+    background-color: #ddd
+    text-align: center
     
-  .options
-    margin: 3em auto
+    .points, .referral
+      padding: 12px
+      
+      .explainer
+        max-width: 400px
+        margin-left: auto
+        margin-right: auto
+      
+      .referral-link
+        margin: 24px auto
+        code
+          color: $flixpress-red
+      
+      &:first-child
+        border-bottom: $border-width solid #fff
+        +breakpoint($sm)
+          border-right: $border-width solid #fff
+          border-bottom: none
+          
+  .how-it-works, .options
+    margin-top: $top-space
     
   .options-button
     float: right
