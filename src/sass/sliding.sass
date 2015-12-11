@@ -1,11 +1,14 @@
 @import 'compass/utilities/general/clearfix'
 @import 'base-includes'
 
+$num-sliders: 3
+
 .info-sliders
   &, & *
     box-sizing: border-box
-  +clearfix()
-  position: relative
+    position: relative
+  
+  +clearfix
   width: 100%
   //border: 1px solid #ddd //testing
   .info-slider
@@ -13,7 +16,7 @@
 
     > :first-child
       margin-top: 0
-      
+    
     &.details
       +clearfix
       .features-list, .description
@@ -24,47 +27,16 @@
           padding: 0
           li
             padding: 0.25em 0
-      .description  
-
-.info-sliders.no-js
-  .info-slider
-    &.subject
-      width: 31.33%
-      float: left
-      clear: left
-    &.details
-      width: 66.66%
-      float: left
-    +breakpoint($xs-only)
+    
+    &.closed
+      &.details, &.subject
+        display: none
+    
+    +breakpoint($sm)
       &.subject
-        text-align: center
-        width: 100%
-        padding-bottom: 0
-        margin-bottom: 0
-        > :last-child
-          margin-bottom: 0
-          padding-bottom: 0
+        width: 100% * (1 / $num-sliders)
+        float: left
       &.details
-        width: 100%
-  a.no-click
-    display: none
-
-.info-sliders.js
-  .info-slider
-    &.subject
-      width: 32.33%
-      float: left
-      cursor: pointer
-      margin-left: 0.5%
-      margin-right: 0.5%
-      text-align: center
-
-      .subject-title
-        text-align: center
-        margin: 12px auto
-    &.details
-      display: none
-      padding-left: 2em
-      padding-right: 1em
-  a.no-click
-    display: block
+        width: 100% - (100 / $num-sliders)
+        float: left
+      
