@@ -5,6 +5,7 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
+import rs from 'run-sequence';
 // import {stream as wiredep} from 'wiredep';
 
 // NodeJS level requires:
@@ -85,7 +86,7 @@ function replaceOnDisk (begStr, endStr, insertFile, destFile, destDir) {
 
 // Plan Slider stuff
 gulp.task('replacePlanCssLive', ['styles'], () => {
-  replaceOnDisk(
+  return replaceOnDisk(
     '/* plan-slider.css build:begin */',
     '/* plan-slider.css build:end */',
     '.tmp/plan-slider.css',
@@ -94,7 +95,7 @@ gulp.task('replacePlanCssLive', ['styles'], () => {
 
 // incentive stuff
 gulp.task('replaceIncentiveCssLive', ['styles'], () => {
-  replaceOnDisk(
+  return replaceOnDisk(
     '/* incentives.css build:begin */',
     '/* incentives.css build:end */',
     '.tmp/incentives.css',
@@ -103,7 +104,7 @@ gulp.task('replaceIncentiveCssLive', ['styles'], () => {
 
 // pricing css stuff
 gulp.task('replacePricingCssLive', ['styles'], () => {
-  replaceOnDisk(
+  return replaceOnDisk(
     '/* price-grid.css build:begin */',
     '/* price-grid.css build:end */',
     '.tmp/pricing-grid.css',
@@ -112,7 +113,7 @@ gulp.task('replacePricingCssLive', ['styles'], () => {
 
 // template browser css stuff
 gulp.task('replaceTemplateBrowserCssLive', ['styles'], () => {
-  replaceOnDisk(
+  return replaceOnDisk(
     '/* template-browser.css build:begin */',
     '/* template-browser.css build:end */',
     '.tmp/template-browser.css',
@@ -121,7 +122,7 @@ gulp.task('replaceTemplateBrowserCssLive', ['styles'], () => {
 
 // Info sliders stuff
 gulp.task('replaceSliderCssLive', ['styles'], () => {
-  replaceOnDisk(
+  return replaceOnDisk(
     '/* slider.css build:begin */',
     '/* slider.css build:end */',
     '.tmp/sliding.css',
@@ -129,7 +130,7 @@ gulp.task('replaceSliderCssLive', ['styles'], () => {
 });
 
 gulp.task('replaceSliderHtmlLive', () => {
-  replaceOnDisk(
+  return replaceOnDisk(
     '<!-- slider.html build:begin -->',
     '<!-- slider.html build:end -->',
     'src/_sliding-part.html',
@@ -137,25 +138,45 @@ gulp.task('replaceSliderHtmlLive', () => {
 });
 
 gulp.task('replaceSliderJsLive', () => {
-  replaceOnDisk(
+  return replaceOnDisk(
     '<!-- slider.js build:begin -->',
     '<!-- slider.js build:end -->',
     'src/_sliding-part-js.html',
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/HomePage.ascx');
 });
 
-gulp.task('localhost', () => {
+gulp.task('replaceSliderJsLocal', () => {
+  return replaceOnDisk(
+    '<!-- slider.js build:begin -->',
+    '<!-- slider.js build:end -->',
+    'src/_sliding-part-js.html',
+    '.tmp/sliding.html');
+});
+
+gulp.task('replaceSliderHtmlLocal', () => {
+  return replaceOnDisk(
+    '<!-- slider.html build:begin -->',
+    '<!-- slider.html build:end -->',
+    'src/_sliding-part.html',
+    '.tmp/sliding.html');
+});
+
+gulp.task('replaceSliderLocal', () => {
+  rs('replaceSliderHtmlLocal','replaceSliderJsLocal')
+});
+
+gulp.task('devServer', () => {
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
   gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceSliderCssLive']);
+  // gulp.watch('src/_sliding-part-js.html', ['replaceSliderJsLive']);
   
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
   // Do not update here without pulling in the changes.
   // (The build tags were removed on the server, too, to avoid issues.)
   //// gulp.watch('src/_sliding-part.html', ['replaceSliderHtmlLive']);
-  //// gulp.watch('src/_sliding-part-js.html', ['replaceSliderJsLive']);
 });
 
 // function lint(files, options) {
@@ -235,6 +256,12 @@ gulp.task('serve', ['styles'/*, 'fonts'*/], () => {
       }
     }
   });
+  
+  gulp.src(['src/sliding.html']).pipe(gulp.dest('.tmp/'));
+
+  rs('replaceSliderLocal');
+
+  gulp.watch('src/*-part*', ['replaceSliderLocal']);
 
   gulp.watch([
     'src/*.html',

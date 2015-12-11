@@ -43,6 +43,7 @@
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^2.0.0",
     "opn": "^3.0.2",
+    "run-sequence": "^1.1.5",
     "time-grunt": "^1.0.0"
   }
 }
