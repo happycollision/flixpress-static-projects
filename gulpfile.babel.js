@@ -134,22 +134,22 @@ gulp.task('replaceSliderHtmlLive', () => {
     '<!-- slider.html build:begin -->',
     '<!-- slider.html build:end -->',
     'src/_sliding-part.html',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/HomePage.ascx');
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/CommonParts/TargetAudienceSliders.ascx');
 });
 
 gulp.task('replaceSliderJsLive', () => {
   return replaceOnDisk(
-    '<!-- slider.js build:begin -->',
-    '<!-- slider.js build:end -->',
-    'src/_sliding-part-js.html',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/HomePage.ascx');
+    '/*/ slider.js build:begin /*/',
+    '/*/ slider.js build:end /*/',
+    'src/_sliding-part.js',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/CommonParts/TargetAudienceSliders.ascx');
 });
 
 gulp.task('replaceSliderJsLocal', () => {
   return replaceOnDisk(
-    '<!-- slider.js build:begin -->',
-    '<!-- slider.js build:end -->',
-    'src/_sliding-part-js.html',
+    '/*/ slider.js build:begin /*/',
+    '/*/ slider.js build:end /*/',
+    'src/_sliding-part.js',
     '.tmp/sliding.html');
 });
 
@@ -171,7 +171,7 @@ gulp.task('devServer', () => {
   gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceSliderCssLive']);
-  // gulp.watch('src/_sliding-part-js.html', ['replaceSliderJsLive']);
+  // gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
   
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
   // Do not update here without pulling in the changes.

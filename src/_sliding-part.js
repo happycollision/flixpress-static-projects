@@ -1,5 +1,3 @@
-<script type="text/javascript">
-    
 (function () {
 function storeCss ($object, type) {
   var typesArray = {
@@ -59,8 +57,6 @@ function makeActive (element){
     .css('width', '100%')
   ;
   
-  
-
   // Start animating Siblings
   hideSiblings($el.siblings('.subject'), $sibsProm);
   $sibsProm.done(function(){
@@ -149,5 +145,3 @@ $container.on('click', '.subject', function(e){
   }
 });
 })()
-
-</script>
