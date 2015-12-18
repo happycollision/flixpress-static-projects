@@ -168,10 +168,10 @@ gulp.task('replaceSliderLocal', () => {
 gulp.task('devServer', () => {
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceTemplateBrowserCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePricingCssLive']);
-  gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
+  // gulp.watch('src/sass/*.{scss,sass}', ['replaceIncentiveCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replacePlanCssLive']);
   // gulp.watch('src/sass/*.{scss,sass}', ['replaceSliderCssLive']);
-  // gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
+  gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
   
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
   // Do not update here without pulling in the changes.

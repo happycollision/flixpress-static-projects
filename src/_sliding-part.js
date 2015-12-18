@@ -1,4 +1,7 @@
-(function () {
+(function (containerSelector, slidersSelector) {
+var $container = $(containerSelector)
+var $sliders = $container.find(slidersSelector);
+
 function storeCss ($object, type) {
   var typesArray = {
       positioning: ['top', 'left', 'position'],
@@ -128,9 +131,6 @@ function resizeContainer($el, $children) {
   });
 }
 
-var $container = $('.info-sliders')
-var $sliders = $container.find('.info-slider.subject');
-
 $container.removeClass('no-js').addClass('js');
 $sliders.data('active', false);
 $sliders.css('clear', 'none').siblings().filter('.details').css('display', 'none');
@@ -144,4 +144,4 @@ $container.on('click', '.subject', function(e){
     resizeContainer($container, $sliders)
   }
 });
-})()
+})('.info-sliders','.info-slider.subject')
