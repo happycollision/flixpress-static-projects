@@ -45,7 +45,9 @@ function makeActive (element){
   var $el = $(element),
     $sibsProm = $.Deferred();
     $elProm = $.Deferred();
-
+    
+  $container.trigger('sliderWillBeActive', [ element, $el.next('.details')[0] ]);
+  
   $el.parent().css('height', $el.parent().css('height'));
   
   $el.parent().children('.subject')
@@ -79,7 +81,7 @@ function makeInactive (element){
 
   $el.data('active','unavailable');
   // Trigger an event that passes this element and the subject div 
-  $container.trigger('sliderInactive', [ element, $el.next('.details')[0] ]);
+  $container.trigger('sliderWillBeInactive', [ element, $el.next('.details')[0] ]);
 
   hideDetails($el);
 
@@ -99,6 +101,7 @@ function makeInactive (element){
         $(this).css( $(this).data('positioning') );
       })
     ;
+    $container.trigger('sliderInactive', [ element, $el.next('.details')[0] ]);
   });
 };
 
