@@ -145,32 +145,6 @@ $container.on('click', '.subject', function(e){
     resizeContainer($container, $sliders)
   }
 });
-})//()
-
-// var $clone = $('.info-sliders').clone();
-// $clone.appendTo('.placeholder').find('.subject, .details').addClass('closed');
-
-var c = jQuery('.info-sliders');
-(function ($container) {
-  var $subjects = $container.find('.subject');
-  var $details = $container.find('.details');
-  $container.find('.info-slider.details').addClass('closed');
-  
-  // rudimentary implementation
-  $container.on('click','.subject', function(){
-    var s = $(this);
-    var d = s.next('.details');
-    var closed = d.hasClass('closed');
-    
-    if(closed){
-      s.siblings('.subject, .details').addClass('closed');
-      s.removeClass('closed');
-      d.removeClass('closed');      
-    } else {
-      $subjects.removeClass('closed');
-      $details.addClass('closed');
-    }
-  });
-})(c)
+})()
 
 </script>
