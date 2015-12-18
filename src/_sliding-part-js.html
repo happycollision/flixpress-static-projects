@@ -27,10 +27,13 @@ function hideSiblings ($siblings, sibsReadyPromise) {
 
   // Step two
   storeCss($siblings, 'visibility');
-  $siblings.animate({opacity: 0}, 250, 'linear');
+  $siblings.animate({opacity: 0}, 250, 'linear', function(){
+    $siblings.css('visibility', 'hidden');
+  });
 };
 
 function showSiblings ($siblings, sibsReadyPromise) {
+  $siblings.css('visibility', 'visible');
   $siblings.animate($siblings.data('visibility'), function(){
     
   });
