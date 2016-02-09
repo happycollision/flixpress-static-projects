@@ -22,9 +22,32 @@
       .features-list
         ul
           padding: 0
+          //Added by Andrey
+          list-style-type: none
           li
-            padding: 0.25em 0
-      .description  
+            //added by Andrey on server
+            padding: 0.2em 0 0.2em 0.5em
+            margin: 0 30px 8px -30px 
+            font-size: 18px
+            background-color: #fff
+            color: #222
+            display: block
+            font-stretch: condensed
+            border-radius: 5px
+
+    // Added by Andrey on server
+    &.subject
+      img
+        border: 8px solid #fff
+      &:hover
+        img
+          border-color: $flixpress-blue
+          box-shadow: 10px 10px 10px #aaa
+          
+// Added on server... very non-specific...
+.video-wrapper
+  border: 8px solid #fff
+  box-shadow: 5px 5px 5px #aaa
 
 .info-sliders.no-js
   .info-slider
@@ -61,10 +84,15 @@
 
       .subject-title
         text-align: center
-        margin: 12px auto
+        margin: 0 20px
+        font-size: 18px
+        font-weight: 700
+        color: 222
+        background-color: #fff
+        padding: 10px 0 15px 0
     &.details
       display: none
-      padding-left: 2em
-      padding-right: 1em
+      padding-left: 0
+      padding-right: 0
   a.no-click
     display: block
