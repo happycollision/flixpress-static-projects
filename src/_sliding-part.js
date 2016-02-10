@@ -67,7 +67,7 @@ function makeActive (element){
   $sibsProm.done(function(){
     showDetails($el);
     $el.animate({left: 0}, 800, 'easeOutCubic', function(){
-      $el.data('active', true);
+      $el.data('active', true).addClass('active');
       // Trigger an event that passes this element and the subject div 
       $container.trigger('sliderActive', [ element, $el.next('.details')[0] ]);
     });    
@@ -79,7 +79,7 @@ function makeInactive (element){
     $sibsProm = $.Deferred();
     $elProm = $.Deferred();
 
-  $el.data('active','unavailable');
+  $el.data('active','unavailable').removeClass('active');
   // Trigger an event that passes this element and the subject div 
   $container.trigger('sliderWillBeInactive', [ element, $el.next('.details')[0] ]);
 

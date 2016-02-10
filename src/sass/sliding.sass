@@ -39,11 +39,43 @@
     &.subject
       img
         border: 8px solid #fff
+      .video-placeholder
+        position: relative
+        z-index: 1
+        &:before
+          content: ''
+          background: url("images/play-button.svg") no-repeat
+          background-size: 25%
+          background-position: center
+          z-index: 2
+          position: absolute
+          top: 0
+          bottom: 0
+          left: 0
+          right: 0
+          filter: drop-shadow(0px 0px 5px black)
       &:hover
         img
           border-color: $flixpress-blue
           box-shadow: 10px 10px 10px #aaa
-          
+      &.active
+        .video-placeholder:before
+          content: 'Close'
+          background: $flixpress-blue
+          top: 12px
+          left: 12px
+          text-align: left
+          color: white
+          padding: 6px
+          bottom: auto
+          right: auto
+          filter: none
+      &.active:hover
+        .video-placeholder:before
+          background: $flixpress-red
+        img
+          border-color: $flixpress-red
+
 // Added on server... very non-specific...
 .video-wrapper
   border: 8px solid #fff
