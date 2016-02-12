@@ -17,17 +17,17 @@
     &.details
       +clearfix
       .features-list, .description
-        margin-top: 0.75em
+        //margin-top: 0.75em
         font-size: 1.3em
       .features-list
         ul
           padding: 0
-          //Added by Andrey
+          margin: 0
           list-style-type: none
           li
             //added by Andrey on server
             padding: 0.2em 0 0.2em 0.5em
-            margin: 0 30px 8px -30px 
+            margin: 0 0 8px 0 
             font-size: 18px
             background-color: #fff
             color: #222
@@ -37,8 +37,28 @@
 
     // Added by Andrey on server
     &.subject
-      img
+      // Makes room for drop shadow from s-content-wrapper
+      margin-bottom: 19px
+      
+      .s-content-wrapper
+        background: #fff
         border: 8px solid #fff
+        box-shadow: 5px 5px 5px #aaa
+        
+        img
+          width: 100%
+          
+        h2.subject-title
+          margin: auto
+          padding: 8px 0 6px 
+
+      &:hover .s-content-wrapper
+        border-color: $flixpress-blue
+      
+      &.active:hover .s-content-wrapper
+        border-color: $flixpress-red
+      
+      
       .video-placeholder
         position: relative
         z-index: 1
@@ -54,13 +74,11 @@
           left: 0
           right: 0
           filter: drop-shadow(0px 0px 5px black)
-      &:hover
-        img
-          border-color: $flixpress-blue
-          box-shadow: 10px 10px 10px #aaa
+
       &.active
         .video-placeholder:before
           content: 'Close'
+          font-size: 1.3em
           background: $flixpress-blue
           top: 12px
           left: 12px
