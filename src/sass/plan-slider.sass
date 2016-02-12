@@ -137,18 +137,31 @@
 
 .pay-period-switcher
   border-top: 1px solid #aaa
-  span
-    display: inline-block
-    border-radius: 3px
-    overflow: hidden
-    border: 1px solid $flixpress-red
-    margin: 4px auto
-  a
+  padding: 4px 0
+  
+  .option-switcher-frame
+    margin: auto
+  
+// TODO: move this to a new document, since it is a helper class that should be used anywhere.
+.option-switcher-frame
+  display: inline-block
+  border-radius: 3px
+  overflow: hidden
+  border: 1px solid $flixpress-red
+  padding: 0
+  
+  input[type="radio"]
+    display: none
+  
+  .option-switcher-switch
     background: #fff
     color: $flixpress-red
     padding: 3px 5px
     cursor: pointer
     transition: none
+    margin: 0
+    display: block
+    float: left
 
     &.active, &.active:hover
       background-color: $flixpress-red
