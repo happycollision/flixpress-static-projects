@@ -5,7 +5,7 @@ $(document).ready(function(){
   var $more = $('.more-info');
   $more.html(showMoreText);
   $more.on('click', function(){
-    $(this).siblings('.secondary-feature').toggle();
+    $(this).closest('table, ul').find('.secondary-feature').toggle();
     if($(this).html() === showMoreText){
       $(this).html(showLessText);
     } else {

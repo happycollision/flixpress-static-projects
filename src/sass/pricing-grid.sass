@@ -155,22 +155,24 @@ $feature-text-color: #000
       border-bottom: 1px solid $square-border
       padding: 8px
 
-    .secondary-feature
-      display: none
-
-    .more-info
-      @extend .feature
-      display: none
-      cursor: pointer
-      text-decoration: underline
-      //color: #fff
-      background-color: $squares-color
-
-      &:hover
-        background-color: darken($squares-color, 10)
 
     .buy-now-button.btnRed
       margin-top: 0 !important
+
+.secondary-feature
+  display: none
+
+.secondary-feature, .secondary-feature td
+  background-color: darken($squares-color, 5) !important
+
+.more-info
+  display: none
+  cursor: pointer
+  text-decoration: underline
+  background-color: $squares-color
+
+  &:hover
+    background-color: darken($squares-color, 10) !important
 
 .explanations
   display: none
