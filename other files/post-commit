@@ -1,0 +1,4 @@
+#!/bin/bash
+
+last_commit=$(git log -1 HEAD | sed -e 's/"/\\"/g')
+curl -X POST --data-urlencode "payload={\"channel\": \"#code-notifications\", \"username\": \"GitBot\", \"text\": \"$last_commit\", \"icon_emoji\": \":floppy_disk:\"}" https://hooks.slack.com/services/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
