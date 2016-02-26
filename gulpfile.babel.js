@@ -94,12 +94,12 @@ gulp.task('replacePlanCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
-// incentive stuff
-gulp.task('replaceIncentiveCssLive', ['styles'], () => {
+// many styles for individual pages
+gulp.task('replaceSpecificPagesCssLive', ['styles'], () => {
   return replaceOnDisk(
-    '/* incentives.css build:begin */',
-    '/* incentives.css build:end */',
-    '.tmp/incentives.css',
+    '/* specific-pages.css build:begin */',
+    '/* specific-pages.css build:end */',
+    '.tmp/specific-pages.css',
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
@@ -169,7 +169,7 @@ gulp.task('replaceSliderLocal', () => {
 gulp.task('devServer', () => {
   gulp.watch('src/sass/template-browser.{scss,sass}', ['replaceTemplateBrowserCssLive']);
   gulp.watch('src/sass/pricing-grid.{scss,sass}', ['replacePricingCssLive']);
-  gulp.watch('src/sass/incentives.{scss,sass}', ['replaceIncentiveCssLive']);
+  gulp.watch(['src/sass/specific-pages.{scss,sass}','src/sass/specific-pages/*'], ['replaceSpecificPagesCssLive']);
   gulp.watch('src/sass/plan-slider.{scss,sass}', ['replacePlanCssLive']);
   gulp.watch('src/sass/sliding.{scss,sass}', ['replaceSliderCssLive']);
   gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
