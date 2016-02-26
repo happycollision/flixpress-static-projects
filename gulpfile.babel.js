@@ -81,6 +81,7 @@ function replaceOnDisk (begStr, endStr, insertFile, destFile, destDir) {
     .pipe($.replace(regex2, (match, p1, offset, string) => {
       return `${beginningString}\n\n${insert}\n\n${endingString}`;
     }))
+    .pipe($.lineEndingCorrector({eolc: 'CRLF'}))
     .pipe(gulp.dest(destDir));
 };
 
