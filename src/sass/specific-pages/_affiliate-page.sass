@@ -42,6 +42,7 @@
     text-align: center
     &.last
       margin-top: 36px
+      margin-bottom: 36px
     .affiliate-button
       font-size: 1.4em
       padding: 15px 60px
@@ -53,4 +54,36 @@
         border-bottom: 1px solid rgb(2,139,255)
         &:hover
           border-color: #23527c
+
+
+  .accordion
+    margin: auto
+    
+    h4, div
+      background: #ccc
+      border-radius: 6px
+      padding: 24px 10%
+      max-width: 800px
+      margin: auto
+    
+    h4
+      margin-bottom: 32px
+      font-size: 1.2em
+      font-weight: bold
+      position: relative
+      cursor: pointer
+      
+      &:before
+        content: "+"
+        position: absolute
+        left: 3.5%
+        font-size: 1.3em
+        top: 17px
+        
+      &.ui-state-active:before
+        content: "\2013"
+      
+    div
+      margin-top: -#{32 + 8}px
+      margin-bottom: 32px
       
