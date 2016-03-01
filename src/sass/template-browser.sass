@@ -33,6 +33,8 @@
     overflow: hidden
 
   &.template-group
+    .tempDur
+      display: none
     &:after, &:before
       content: ''
       border: 1px solid black
@@ -57,7 +59,11 @@
         +ribbon
         content: 'Group'
         background-color: goldenrod
-        padding-left: 2.1em
+        padding-left: 2em
+        // Undo top left align
+        top: auto
+        bottom: 0.5em
+        transform: rotate(#{46}deg)
 
   &.TryIt
     .ribbon-placeholder
