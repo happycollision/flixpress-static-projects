@@ -1,0 +1,80 @@
+@import 'compass/utilities/general/clearfix'
+@import 'base-includes'
+
+.explainer-rows
+  font-size: 1.6em
+
+  h2
+    text-transform: uppercase
+    text-align: center
+    font-weight: bold
+    font-size: 2.1em
+    margin-bottom: 36px
+    
+  h3
+    font-weight: bold
+    font-size: 1.3em
+    
+  img.icon
+    margin: 12px auto
+    width: 145px
+    max-width: 100%
+    display: block
+  
+  img.icon.large, .explainer-row-description img.icon
+    width: 245px
+    
+  .explainer-row-description p
+    font-weight: bold
+    margin-top: 36px
+  
+  .row
+    border-bottom: 1px solid #777
+    padding: 36px 0
+  
+    &.explainer-row-description
+      border-bottom: 5px solid $flixpress-red
+      padding-bottom: 12px
+
+  .explainer-rows-button
+    font-size: 1.4em
+    padding: 15px 60px
+  .alternate-option
+    font-weight: lighter
+    font-size: 0.75em
+    margin: 12px auto
+    a, a:visited, a:link
+      border-bottom: 1px solid rgb(2,139,255)
+      &:hover
+        border-color: #23527c
+
+  .accordion
+    margin: auto
+    
+    h4, div
+      background: #ccc
+      border-radius: 6px
+      padding: 24px 10%
+      max-width: 800px
+      margin: auto
+    
+    h4
+      margin-bottom: 32px
+      font-size: 1.2em
+      font-weight: bold
+      position: relative
+      cursor: pointer
+      
+      &:before
+        content: "+"
+        position: absolute
+        left: 3.5%
+        font-size: 1.3em
+        top: 17px
+        
+      &.ui-state-active:before
+        content: "\2013"
+      
+    div
+      margin-top: -#{32 + 8}px
+      margin-bottom: 32px
