@@ -94,6 +94,15 @@ gulp.task('replacePlanCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
+// Plan Slider stuff
+gulp.task('replaceHelperCssLive', ['styles'], () => {
+  return replaceOnDisk(
+    '/* helpers-and-blocks.css build:begin */',
+    '/* helpers-and-blocks.css build:end */',
+    '.tmp/helpers-and-blocks.css',
+    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+});
+
 // many styles for individual pages
 gulp.task('replaceSpecificPagesCssLive', ['styles'], () => {
   return replaceOnDisk(
@@ -171,6 +180,7 @@ gulp.task('devServer', () => {
   gulp.watch('src/sass/pricing-grid.{scss,sass}', ['replacePricingCssLive']);
   gulp.watch(['src/sass/specific-pages.{scss,sass}','src/sass/specific-pages/*'], ['replaceSpecificPagesCssLive']);
   gulp.watch('src/sass/plan-slider.{scss,sass}', ['replacePlanCssLive']);
+  gulp.watch('src/sass/helpers-and-blocks.{scss,sass}', ['replaceHelperCssLive']);
   gulp.watch('src/sass/sliding.{scss,sass}', ['replaceSliderCssLive']);
   gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
   
