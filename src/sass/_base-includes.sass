@@ -1,3 +1,4 @@
+@import 'compass/utilities/general/clearfix'
 @import "susy", "breakpoint"
 
 $flixpress-red: #b70000
@@ -45,3 +46,23 @@ $xs-only: (0 767px)
     border-left-color: $arrow-border-color
     border-width: 36px
     margin-top: -36px
+
+=bars-setup
+  content: ""
+  background-color: inherit
+  position: absolute
+  top: 0
+  bottom: 0
+  width: 9999px
+
+=fw-bars
+  position: relative
+  &:before 
+    +bars-setup
+    left: -9999px
+  &:after 
+    +bars-setup
+    right: -9999px
+      
+.group, .clearfix
+  +pie-clearfix

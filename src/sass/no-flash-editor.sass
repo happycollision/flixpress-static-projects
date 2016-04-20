@@ -1,0 +1,155 @@
+@import 'base-includes'
+
+// override breakpoints
+$lg: 1000px
+$md: 670px
+$sm: 400px
+$xs-only: (0 399px)
+
+// Image sizes
+$smImage: 7
+$regImage: 14
+
+@function iW($multiplier)
+  @return 16px * $multiplier
+
+@function iH($multiplier)
+  @return 9px * $multiplier
+
+=sides($num)
+  top: $num
+  bottom: $num
+  left: $num
+  right: $num
+
+#editor, .ReactModalPortal
+  font-size: 16px
+  line-height: 1.3
+  padding: 8px
+  padding-top: iH($smImage)
+  overflow-x: hidden
+  
+  .component
+    h1, h2, h3, h4, h5, h6
+      margin: 12px auto
+      +fw-bars
+
+  .editor-title
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    padding: 8px
+    padding-right: iW($smImage) + 8
+    min-height: iH($smImage)
+    background-color: $flixpress-blue
+    z-index: 1
+    
+    +breakpoint($sm)
+      font-size: 24px
+      font-weight: bold
+
+  .input-item
+    margin-top: 8px
+    
+  button, input[type="submit"]
+    font-size: inherit
+    padding: 0.5em 1em
+    background-color: $flixpress-blue
+    color: white
+    border: none
+    border-radius: 6px
+    cursor: pointer
+    margin: 3px 3px 0 0
+    
+    &:hover
+      background-color: darken($flixpress-blue, 10)
+      
+    &.cancel
+      background-color: #999
+      &:hover
+        background-color: darken(#999, 10)
+    
+  input[type="submit"]
+    background-color: $flixpress-red
+    &:hover
+      background-color: darken($flixpress-red, 10)
+  
+  input[type="text"], select
+    vertical-align: text-bottom
+
+  label
+    margin-right: 1em
+    width: 25em
+
+  .preview-image
+    position: fixed
+    top: 0
+    right: 0
+    z-index: 2
+    // float: left
+    width: iW($smImage)
+    height: iH($smImage)
+    // text-align: center
+    // font-size: 1.6px * $regImage
+    text-align: center
+    -webkit-font-smoothing: antialiased
+    cursor: pointer
+    padding: 2px
+    
+    span
+      text-align: center
+      color: white
+      text-shadow: 0 0 2px black
+      font-size: 0.8em
+    &:hover span
+      color: $flixpress-blue
+    
+.ReactModalPortal
+  .picker-header
+    position: fixed
+    +sides(0)
+    bottom: auto
+    .cancel
+      font-size: 0.75em
+      float: right
+  .overlay
+    position: fixed
+    +sides(0)
+    background-color: rgba(255, 255, 255, 0.75)
+    z-index: 100
+  .modal
+    position: absolute
+    +sides(0)
+    // border: 1px solid #ccc
+    background: #fff
+    overflow: auto
+    -webkit-overflow-scrolling: touch
+    // border-radius: 4px
+    outline: none
+    padding: 8px
+    z-index: 101
+    
+  .preview-image-modal button
+    margin-left: auto
+    margin-right: auto
+    display: block
+
+body.ReactModal__Body--open
+  overflow: hidden
+
+.ReactTabs
+  .ReactTabs__Tab
+    border: 1px solid $flixpress-blue
+    background-color: transparent
+    display: inline-block
+    margin: 3px
+    padding: 0.3em
+    border-radius: 6px
+    
+    &.ReactTabs__Tab--selected
+      background-color: $flixpress-blue
+
+.explain
+  color: #888
+  font-size: 0.9em
