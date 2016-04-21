@@ -28,6 +28,7 @@ $lg-image: 17
 $tinyPad: 3px
 $medPad: 8px
 $bigPad: 12px
+$viewportPad: $medPad
 $line-height: 1.3
 $fluid-radius: 0.3em
 $button-padding: 0.2em 0.5em
@@ -43,7 +44,7 @@ $lg-title-font-size: $md-title-font-size
 #editor, .ReactModalPortal
   font-size: $base-font-size
   line-height: $line-height
-  padding: $medPad
+  padding: $viewportPad
   padding-top: iH($xs-image)
   overflow-x: hidden
   +breakpoint($sm)
@@ -192,22 +193,17 @@ code
   border-radius: $fluid-radius
 
 .ReactModalPortal
-  $header-height: 3.5em // Just have to experiment if you change .picker-header
   .sound-picker-modal .react-tabs
-    padding-top: $header-height
     .react-tabs
       padding-top: 0
   .picker-header
-    min-height: $header-height
-    box-shadow: 0 0 2px #999
-    padding: $medPad
+    padding: $viewportPad
+    margin: 0px - $viewportPad
+    margin-bottom: 0
     background-color: white
-    position: fixed
-    +sides(0)
-    bottom: auto
-    z-index: 1 // needed because of fw-bars
     .cancel
       float: right
+      padding: $button-padding
   .overlay
     position: fixed
     +sides(0)
@@ -248,7 +244,7 @@ body.ReactModal__Body--open
     background-color: transparent
     display: inline-block
     margin: $tinyPad
-    padding: $major-button-padding
+    padding: $button-padding
     border-radius: $fluid-radius
     cursor: pointer
     
@@ -259,10 +255,6 @@ body.ReactModal__Body--open
   h2
     +fw-bars
     
-  .ReactTabs 
-    .ReactTabs__Tab
-      padding: $button-padding
-
 .explain
   color: #888
   font-size: 0.9em
