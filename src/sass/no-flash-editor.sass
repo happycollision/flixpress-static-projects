@@ -7,9 +7,10 @@ $sm: 400px
 $xs-only: (0 399px)
 
 // Image sizes
-$xsImage: 7
-$smImage: 9
-$regImage: 14
+$xs-image: 7
+$sm-image: 9
+$md-image: 14
+$lg-image: 17
 
 @function iW($multiplier)
   @return 16px * $multiplier
@@ -23,24 +24,35 @@ $regImage: 14
   left: $num
   right: $num
 
+// Many variables...
+$tinyPad: 3px
+$medPad: 8px
+$bigPad: 12px
+$line-height: 1.3
+$fluid-radius: 0.3em
+$button-padding: 0.1em 0.2em
+
+$sm-title-font-size: 24px
+$md-title-font-size: $sm-title-font-size
+$lg-title-font-size: $md-title-font-size
+
 .ReactModalPortal
   display: none
 
-
 #editor, .ReactModalPortal
-  font-size: 16px
-  line-height: 1.3
-  padding: 8px
-  padding-top: iH($xsImage)
+  font-size: $base-font-size
+  line-height: $line-height
+  padding: $medPad
+  padding-top: iH($xs-image)
   overflow-x: hidden
   +breakpoint($sm)
-    padding-top: iH($smImage)
+    padding-top: iH($sm-image)
   +breakpoint($md)
-    padding-top: (24px * 1.3) + (8 * 2) //title font size times line height plus padding top and bottom
+    padding-top: ($md-title-font-size * $line-height) + ($medPad * 2)
   
   .component
     h1, h2, h3, h4, h5, h6
-      margin: 12px auto
+      margin: $bigPad auto
       +fw-bars
 
   .editor-title
@@ -51,30 +63,30 @@ $regImage: 14
     top: 0
     left: 0
     right: 0
-    padding: 8px
-    padding-right: iW($xsImage) + 8
-    min-height: iH($xsImage)
+    padding: $medPad
+    padding-right: iW($xs-image) + 8
+    min-height: iH($xs-image)
     background-color: $flixpress-blue
     z-index: 1
     
     +breakpoint($sm)
-      font-size: 24px
+      font-size: $sm-title-font-size
       font-weight: bold
-      padding-right: iW($smImage) + 8
-      min-height: iH($smImage)
+      padding-right: iW($sm-image) + 8
+      min-height: iH($sm-image)
     
     +breakpoint($md)
       min-height: 0
-      padding-right: 8px
+      padding-right: $medPad
 
   .input-item
-    margin-top: 8px
+    margin-top: $medPad
     label:after
       content: ':'
     
     +breakpoint($sm)
       max-width: 400px
-      margin: 12px auto
+      margin: $bigPad auto
       +pie-clearfix
       %parts
         width: 49%
@@ -96,9 +108,9 @@ $regImage: 14
     background-color: $flixpress-blue
     color: white
     border: none
-    border-radius: 6px
+    border-radius: $fluid-radius
     cursor: pointer
-    margin: 3px 3px 0 0
+    margin: $tinyPad $tinyPad 0 0
     
     &:hover
       background-color: darken($flixpress-blue, 10)
@@ -118,7 +130,6 @@ $regImage: 14
 
   label
     margin-right: 1em
-    width: 25em
 
   .preview-image
     position: fixed
@@ -126,14 +137,14 @@ $regImage: 14
     right: 0
     z-index: 2
     // float: left
-    width: iW($xsImage)
-    height: iH($xsImage)
+    width: iW($xs-image)
+    height: iH($xs-image)
     // text-align: center
-    // font-size: 1.6px * $regImage
+    // font-size: 1.6px * $md-image
     text-align: center
     -webkit-font-smoothing: antialiased
     cursor: pointer
-    padding: 2px
+    padding: $tinyPad
     
     &.missing
       display: flex
@@ -147,18 +158,18 @@ $regImage: 14
       text-align: center
       color: white
       text-shadow: 0 0 2px black
-      font-size: 0.8em
+      font-size: iW($sm-image) * 0.09
     &:hover span
       color: $flixpress-blue
       
     +breakpoint($sm)
-      width: iW($smImage)
-      height: iH($smImage)
+      width: iW($sm-image)
+      height: iH($sm-image)
     
     +breakpoint($md)
       position: relative
-      width: iW($regImage)
-      height: iH($regImage)
+      width: iW($md-image)
+      height: iH($md-image)
     
 .sound-picker-component, .resolution-picker-component, .submit-render-component
   margin: 1em auto
@@ -176,11 +187,11 @@ $regImage: 14
 code
   font-family: monospace
   background-color: rgba(0,0,0,0.3)
-  padding: 1px 2px
-  border-radius: 3px
+  padding: $button-padding
+  border-radius: $fluid-radius
 
 .ReactModalPortal
-  $header-height: 3em
+  $header-height: 3em // Just have to experiment if you change .picker-header
   .sound-picker-modal .react-tabs
     padding-top: $header-height
     .react-tabs
@@ -188,13 +199,12 @@ code
   .picker-header
     min-height: $header-height
     box-shadow: 0 0 2px #999
-    padding: 6px
+    padding: $medPad
     background-color: white
     position: fixed
     +sides(0)
     bottom: auto
     .cancel
-      font-size: 0.75em
       float: right
   .overlay
     position: fixed
@@ -208,9 +218,8 @@ code
     background: #fff
     overflow: auto
     -webkit-overflow-scrolling: touch
-    // border-radius: 4px
     outline: none
-    padding: 8px
+    padding: $medPad
     z-index: 101
     
   .preview-image-modal
@@ -236,9 +245,9 @@ body.ReactModal__Body--open
     border: 1px solid $flixpress-blue
     background-color: transparent
     display: inline-block
-    margin: 3px
+    margin: $tinyPad
     padding: 0.3em
-    border-radius: 6px
+    border-radius: $fluid-radius
     cursor: pointer
     
     &.ReactTabs__Tab--selected, &:hover
@@ -250,12 +259,12 @@ body.ReactModal__Body--open
   font-size: 0.9em
   
 .song-item
-  padding: 3px
-  margin: 3px auto
+  padding: $tinyPad
+  margin: $tinyPad auto
   overflow: hidden
   background-color: #333
   color: white
-  font-size: 14px
+  font-size: $base-font-size * 0.875
   
   .song-name
     margin-left: 1em
@@ -263,10 +272,10 @@ body.ReactModal__Body--open
     float: left
   
   button
-    font-size: 12px
-    padding: 3px 5px
-    margin: 0 3px 0 0
-    width: 5em
+    font-size: $base-font-size * 0.75
+    padding: $button-padding
+    margin: 0 $tinyPad 0 0
+    width: 4.3em
     float: left
     
   &.playing
@@ -275,12 +284,12 @@ body.ReactModal__Body--open
   
   +breakpoint($sm)
     width: 49%
-    margin: 3px 0.5%
+    margin: $tinyPad 0.5%
     float: left
     text-align: center
-    padding: 8px
+    padding: $medPad
     
     .song-name, button
       float: none
     .song-name
-      margin: 8px 0 0 0
+      margin: $medPad 0 0 0
