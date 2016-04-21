@@ -193,17 +193,25 @@ code
   border-radius: $fluid-radius
 
 .ReactModalPortal
-  .sound-picker-modal .react-tabs
-    .react-tabs
-      padding-top: 0
-  .picker-header
-    padding: $viewportPad
-    margin: 0px - $viewportPad
-    margin-bottom: 0
-    background-color: white
+  .sound-picker-modal
+    .ReactTabs .ReactTabs .ReactTabs__TabList
+      margin-top: $bigPad
+      margin-bottom: $bigPad
     .cancel
       float: right
       padding: $button-padding
+    .react-tabs .react-tabs
+      padding-top: 0
+    .picker-header
+      border: 1px solid $flixpress-blue
+      display: inline-block
+      border-radius: $fluid-radius
+      overflow: hidden
+      margin-bottom: $medPad
+      li
+        margin: 0
+        border-radius: 0
+        border: none
   .overlay
     position: fixed
     +sides(0)
@@ -247,6 +255,7 @@ body.ReactModal__Body--open
     padding: $button-padding
     border-radius: $fluid-radius
     cursor: pointer
+    color: $flixpress-blue
     
     &.ReactTabs__Tab--selected, &:hover
       background-color: $flixpress-blue
