@@ -97,6 +97,11 @@ $regImage: 14
     cursor: pointer
     padding: 2px
     
+    &.missing
+      background-color: darken($flixpress-blue, 10)
+      span, &:hover span
+        color: white
+    
     span
       text-align: center
       color: white
@@ -105,8 +110,36 @@ $regImage: 14
     &:hover span
       color: $flixpress-blue
     
+.sound-picker-component, .resolution-picker-component, .submit-render-component
+  margin: 1em auto
+  text-align: center
+
+.submit-render-component
+  margin: 3em auto
+  #Submit_BT
+    width: 10em
+
+.user-messages
+  .user-message.bad
+    font-size: 0.85em
+    
+code
+  font-family: monospace
+  background-color: rgba(0,0,0,0.3)
+  padding: 1px 2px
+  border-radius: 3px
+
 .ReactModalPortal
+  $header-height: 3em
+  .sound-picker-modal .react-tabs
+    padding-top: $header-height
+    .react-tabs
+      padding-top: 0
   .picker-header
+    min-height: $header-height
+    box-shadow: 0 0 2px #999
+    padding: 6px
+    background-color: white
     position: fixed
     +sides(0)
     bottom: auto
@@ -154,10 +187,36 @@ body.ReactModal__Body--open
     margin: 3px
     padding: 0.3em
     border-radius: 6px
+    cursor: pointer
     
-    &.ReactTabs__Tab--selected
+    &.ReactTabs__Tab--selected, &:hover
       background-color: $flixpress-blue
+      color: white
 
 .explain
   color: #888
   font-size: 0.9em
+  
+.song-item
+  padding: 3px
+  margin: 3px auto
+  overflow: hidden
+  background-color: #333
+  color: white
+  font-size: 14px
+  
+  .song-name
+    margin-left: 1em
+    display: block
+    float: left
+  
+  button
+    font-size: 12px
+    padding: 3px 5px
+    margin: 0 3px 0 0
+    width: 5em
+    float: left
+    
+  &.playing
+    button.play-toggle
+      background-color: $flixpress-red
