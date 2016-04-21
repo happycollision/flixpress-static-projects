@@ -7,7 +7,8 @@ $sm: 400px
 $xs-only: (0 399px)
 
 // Image sizes
-$smImage: 7
+$xsImage: 7
+$smImage: 9
 $regImage: 14
 
 @function iW($multiplier)
@@ -22,12 +23,18 @@ $regImage: 14
   left: $num
   right: $num
 
+.ReactModalPortal
+  display: none
+
+
 #editor, .ReactModalPortal
   font-size: 16px
   line-height: 1.3
   padding: 8px
-  padding-top: iH($smImage)
+  padding-top: iH($xsImage)
   overflow-x: hidden
+  +breakpoint($sm)
+    padding-top: iH($smImage)
   
   .component
     h1, h2, h3, h4, h5, h6
@@ -36,21 +43,46 @@ $regImage: 14
 
   .editor-title
     position: fixed
+    display: flex
+    flex-direction: column
+    justify-content: center
     top: 0
     left: 0
     right: 0
     padding: 8px
-    padding-right: iW($smImage) + 8
-    min-height: iH($smImage)
+    padding-right: iW($xsImage) + 8
+    min-height: iH($xsImage)
     background-color: $flixpress-blue
     z-index: 1
     
     +breakpoint($sm)
       font-size: 24px
       font-weight: bold
+      padding-right: iW($smImage) + 8
+      min-height: iH($smImage)
 
   .input-item
     margin-top: 8px
+    label:after
+      content: ':'
+    
+    +breakpoint($sm)
+      max-width: 400px
+      margin: 12px auto
+      +pie-clearfix
+      %parts
+        width: 49%
+        display: block
+      label
+        @extend %parts
+        margin-right: 0.5%
+        float: left
+        &:after
+          content: ''
+      input, select
+        @extend %parts
+        float: right
+        margin-left: 0.5%
     
   button, input[type="submit"]
     font-size: inherit
@@ -88,8 +120,8 @@ $regImage: 14
     right: 0
     z-index: 2
     // float: left
-    width: iW($smImage)
-    height: iH($smImage)
+    width: iW($xsImage)
+    height: iH($xsImage)
     // text-align: center
     // font-size: 1.6px * $regImage
     text-align: center
@@ -109,6 +141,10 @@ $regImage: 14
       font-size: 0.8em
     &:hover span
       color: $flixpress-blue
+      
+    +breakpoint($sm)
+      width: iW($smImage)
+      height: iH($smImage)
     
 .sound-picker-component, .resolution-picker-component, .submit-render-component
   margin: 1em auto
@@ -178,6 +214,8 @@ code
 
 body.ReactModal__Body--open
   overflow: hidden
+  .ReactModalPortal
+    display: block
 
 .ReactTabs
   .ReactTabs__Tab
@@ -220,3 +258,15 @@ body.ReactModal__Body--open
   &.playing
     button.play-toggle
       background-color: $flixpress-red
+  
+  +breakpoint($sm)
+    width: 49%
+    margin: 3px 0.5%
+    float: left
+    text-align: center
+    padding: 8px
+    
+    .song-name, button
+      float: none
+    .song-name
+      margin: 8px 0 0 0
