@@ -169,9 +169,35 @@ $lg-title-font-size: $md-title-font-size
       height: iH($sm-image)
     
     +breakpoint($md)
-      position: relative
+      position: absolute
       width: iW($md-image)
       height: iH($md-image)
+      +sides(auto)
+      top: $bigPad
+      right: 25%
+      transform: translateX(50%)
+      
+  
+  +breakpoint($md)
+    .main-interaction-area
+      position: relative
+      +pie-clearfix
+    h3:before, h3:after
+      display: none
+    %main-components
+      width: 50%
+    .editing-ui.component
+      @extend %main-components
+      float: left
+      padding-right: $viewportPad / 2
+    .sound-picker-component, .resolution-picker-component, .submit-render-component
+      @extend %main-components
+      float: right
+      padding-left: $viewportPad / 2
+    
+    // Make room for image
+    .sound-picker-component
+      margin-top: $bigPad * 2 + iH($md-image)
     
 .sound-picker-component, .resolution-picker-component, .submit-render-component
   margin: 1em auto
@@ -183,6 +209,8 @@ $lg-title-font-size: $md-title-font-size
     width: 10em
 
 .user-messages
+  margin-left: 0 - $viewportPad
+  margin-right: 0 - $viewportPad
   .user-message.bad
     font-size: 0.85em
     
@@ -303,3 +331,4 @@ body.ReactModal__Body--open
       float: none
     .song-name
       margin: $medPad 0 0 0
+
