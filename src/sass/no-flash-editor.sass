@@ -34,6 +34,8 @@ $fluid-radius: 0.3em
 $button-padding: 0.2em 0.5em
 $major-button-padding: 0.5em 1em
 
+$bg-color: white
+
 $sm-title-font-size: 24px
 $md-title-font-size: $sm-title-font-size
 $lg-title-font-size: $md-title-font-size
@@ -182,32 +184,40 @@ $lg-title-font-size: $md-title-font-size
   +breakpoint($md)
     .main-interaction-area
       position: relative
+      max-width: 850px //magic number
+      margin-left: auto
+      margin-right: auto
       +pie-clearfix
     h3:before, h3:after
       display: none
-    %main-components
+    .column
       width: 50%
-    .editing-ui.component
-      @extend %main-components
       float: left
-      padding-right: $viewportPad / 2
-    .sound-picker-component, .resolution-picker-component, .submit-render-component
-      @extend %main-components
-      float: right
-      padding-left: $viewportPad / 2
-    
-    // Make room for image
-    .sound-picker-component
-      margin-top: $bigPad * 2 + iH($md-image)
+      &:first-child
+        padding-right: $viewportPad / 2
+      &:last-child
+        padding-left: $viewportPad / 2
+        // Make room for image
+        margin-top: $bigPad * 2 + iH($md-image)
     
 .sound-picker-component, .resolution-picker-component, .submit-render-component
   margin: 1em auto
   text-align: center
 
 .submit-render-component
-  margin: 3em auto
+  background-color: #ddd
+  border: $medPad solid $bg-color
+  padding: $medPad
   #Submit_BT
     width: 10em
+
+
+.account-balance-component
+  +pie-clearfix
+  > div
+    float: left
+    width: 50%
+    padding: $medPad
 
 .user-messages
   margin-left: 0 - $viewportPad
@@ -222,6 +232,45 @@ code
   border-radius: $fluid-radius
 
 .ReactModalPortal
+  .overlay
+    position: fixed
+    +sides(0)
+    background-color: rgba(255, 255, 255, 0.75)
+    z-index: 100
+  .modal
+    position: absolute
+    +sides(0)
+    // border: 1px solid #ccc
+    background: $bg-color
+    overflow-y: auto
+    overflow-x: hidden
+    -webkit-overflow-scrolling: touch
+    outline: none
+    padding: $medPad
+    z-index: 101
+    box-shadow: 0 0 24px #555
+    
+    
+    +breakpoint($md)
+      position: fixed
+      +sides($bigPad * 2)
+
+  .confirm-modal
+    box-shadow: 0 0 24px #000
+    .buttons
+      text-align: center
+      button
+        margin: ($bigPad * 2) $medPad
+        
+    
+    +breakpoint($sm)
+      +sides($bigPad)
+    +breakpoint($md)
+      +sides($bigPad * 4)
+      padding: $bigPad * 4
+  .confirm-modal-overlay
+    background-color: rgba(0,0,0,0.5)
+
   .sound-picker-modal
     .ReactTabs .ReactTabs .ReactTabs__TabList
       margin-top: $bigPad
@@ -241,21 +290,6 @@ code
         margin: 0
         border-radius: 0
         border: none
-  .overlay
-    position: fixed
-    +sides(0)
-    background-color: rgba(255, 255, 255, 0.75)
-    z-index: 100
-  .modal
-    position: absolute
-    +sides(0)
-    // border: 1px solid #ccc
-    background: #fff
-    overflow: auto
-    -webkit-overflow-scrolling: touch
-    outline: none
-    padding: $medPad
-    z-index: 101
     
   .preview-image-modal
     button
