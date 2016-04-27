@@ -6,6 +6,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
 import del from 'del';
 import rs from 'run-sequence';
+import rename from 'gulp-rename';
 // import {stream as wiredep} from 'wiredep';
 
 // NodeJS level requires:
@@ -198,6 +199,15 @@ gulp.task('devServer', () => {
   // Do not update here without pulling in the changes.
   // (The build tags were removed on the server, too, to avoid issues.)
   //// gulp.watch('src/_sliding-part.html', ['replaceSliderHtmlLive']);
+});
+
+gulp.task('reactDev', () => {
+  gulp.watch('src/sass/no-flash-editor.{sass,scss}', ['replaceInReact'])
+});
+gulp.task('replaceInReact', ['styles'],()=>{
+  return gulp.src('.tmp/no-flash-editor.css')
+    .pipe(rename('editor.css'))
+    .pipe(gulp.dest('/Users/Don/Documents/Current Projects/reactTextOnly/src/styles'));
 });
 
 // function lint(files, options) {
