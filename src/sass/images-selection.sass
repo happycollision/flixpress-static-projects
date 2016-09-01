@@ -1,14 +1,51 @@
 @import "base-includes"
 
 #pagination
-  .disabled
-    background-color: #dcdcdc
-    cursor: default
-
-
-  .previous, .next
-    background-color: #84ff76
+  $pagination-button-color: $flixpress-blue
+  $button-text-horiz-pad: 0.4em
+  $button-text-vert-pad: 0.2em
+  $pagination-font-size: 1.3em
+  $pointer-size: ($button-text-vert-pad * 2 + $pagination-font-size) / 2
+  
+  padding: 12px
+  text-align: center
+  .pagination-button
+    font-size: $pagination-font-size
+    line-height: $pagination-font-size
+    display: inline-block
+    padding: #{$button-text-vert-pad} #{$button-text-horiz-pad}
+    background-color: $pagination-button-color
+    color: white
+    // border-radius: 5px
     cursor: pointer
+    margin-left: 8px
+    margin-right: 8px
+    
+    &:hover
+      background-color: darken($pagination-button-color, 10)
+    
+  .next
+    padding-right: $button-text-horiz-pad /2
+    +arrow(right, $pointer-size, $pagination-button-color)
+    &:hover:after
+      // make sure the arrowhead changes too
+      border-left-color: darken($pagination-button-color, 10)
+  .previous
+    padding-left: $button-text-horiz-pad /2
+    +arrow(left, $pointer-size, $pagination-button-color)
+    &:hover:after
+      // make sure the arrowhead changes too
+      border-right-color: darken($pagination-button-color, 10)
+
+  .disabled, .disabled:hover
+    $background-color: #dcdcdc
+    
+    background-color: $background-color
+    cursor: default
+    &.next
+      +arrow(right, $pointer-size, $background-color)
+    &.previous
+      +arrow(left, $pointer-size, $background-color)
 
 
 #results_list, #selected_list, #hard_drive_images

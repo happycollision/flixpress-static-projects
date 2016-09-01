@@ -46,6 +46,32 @@ $xs-only: (0 767px)
     border-left-color: $arrow-border-color
     border-width: 36px
     margin-top: -36px
+    
+=arrow($direction: right, $size: 20px, $color: $flixpress-blue, $border-width: null, $border-color: lighten($flixpress-blue,10))
+  $reverse-direction: if($direction == left,right,left)
+  
+  @if $border-width == null
+    &
+      position: relative
+      background: $color
+
+    &:after 
+      #{$reverse-direction}: 100%
+      top: 50%
+      border: solid transparent
+      content: " "
+      height: 0
+      width: 0
+      position: absolute
+      border-color: transparent
+      border-#{$reverse-direction}-color: $color
+      border-width: #{$size}
+      margin-top: -#{$size}
+
+  @else
+    //nothing...
+    // Right now, we will only do non-border arrows
+
 
 =bars-setup
   content: ""
