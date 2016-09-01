@@ -149,6 +149,15 @@ gulp.task('replaceEditorCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/templates/Styles/editor.css');
 });
 
+// Info sliders stuff
+gulp.task('replaceImageSelectionCssLive', ['styles'], () => {
+  return replaceOnDisk(
+    '/* images-selection.css build:begin */',
+    '/* images-selection.css build:end */',
+    '.tmp/images-selection.css',
+    '/Volumes/MediaRobot/templates/Styles/images-selection.css');
+});
+
 gulp.task('replaceSliderHtmlLive', () => {
   return replaceOnDisk(
     '<!-- slider.html build:begin -->',
@@ -193,6 +202,7 @@ gulp.task('devServer', () => {
   gulp.watch('src/sass/helpers-and-blocks.{scss,sass}', ['replaceHelperCssLive']);
   gulp.watch('src/sass/sliding.{scss,sass}', ['replaceSliderCssLive']);
   gulp.watch('src/sass/no-flash-editor.{sass,scss}', ['replaceEditorCssLive']);
+  gulp.watch('src/sass/images-selection.{sass,scss}', ['replaceImageSelectionCssLive']);
   gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
   
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
