@@ -11,6 +11,17 @@
   box-shadow: 1px 1px 3px rgba(0,0,0,0.5)
   &:hover
     background-color: darken($bgcolor, 7)
+    
+$disabled-button-color: #ddd
+
+input[type="submit"], input[type="button"], button
+  +button
+
+  &[disabled=""], &[disabled="true"], &[disabled="1"]
+    &, &:hover
+      background-color: $disabled-button-color !important
+      cursor: default !important
+
 
 .pagination-container
   $pagination-button-color: $flixpress-blue
@@ -45,14 +56,12 @@
       border-right-color: darken($pagination-button-color, 7)
 
   .disabled, .disabled:hover
-    $background-color: #ddd
-    
-    background-color: $background-color
+    background-color: $disabled-button-color
     cursor: default
     &.next
-      +arrow(right, $pointer-size, $background-color)
+      +arrow(right, $pointer-size, $disabled-button-color)
     &.previous
-      +arrow(left, $pointer-size, $background-color)
+      +arrow(left, $pointer-size, $disabled-button-color)
 
 
 #results_list, #selected_list, #hard_drive_images
