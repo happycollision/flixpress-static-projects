@@ -17,26 +17,6 @@
     float: left;
 }
 
-.floatRight
-{
-    float: right;
-}
-
-.cancelMargins
-{
-    margin: 0px;
-}
-
-.cancelPadding
-{
-    padding: 0px;
-}
-
-.width50
-{
-    width: 50%;
-}
-
 .width100
 {
     width: 100%;
@@ -52,16 +32,6 @@
     width: 330px;
 }
 
-.padding10
-{
-    padding: 10px;
-}
-
-.padding20
-{
-    padding: 20px;
-}
-
 .alignCenter
 {
     text-align: center;
@@ -70,31 +40,6 @@
 .clearBoth
 {
     clear: both;
-}
-
-.fontSize90
-{
-    font-size : 90%;
-}
-
-.fontSize80
-{
-    font-size: 80%;
-}
-
-.fontSize70
-{
-    font-size: 70%;
-}
-
-.positionRelative
-{
-    position: relative;
-}
-
-.positionAbsolute
-{
-    position: absolute;
 }
 
 .no-line-break
@@ -150,11 +95,6 @@ body:after {
   float: right;
   width: 330px;
 }
-.filler-img {
-  display: block;
-  margin: 24px auto;
-  max-width: 300px;
-}
 .DefaultPanel
 {
     background-color: #eee;
@@ -188,11 +128,6 @@ label[for=AgreeToTerms_CB] input{
   bottom: 30px;
   right: 0;
   width: inherit;
-}
-.finalStep{
-  position: absolute;
-  bottom:0;
-  right:0;
 }
 .content {
   background-color: inherit;
