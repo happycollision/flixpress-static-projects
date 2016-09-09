@@ -13,15 +13,85 @@
     background-color: darken($bgcolor, 7)
     
 $disabled-button-color: #ddd
+$proceed-breakpoint: 0 490px
+
+$seconds-of-movement: 1
+$seconds-total: 5
+@keyframes shake
+  #{0/$seconds-total}%, #{100/$seconds-total}%
+    transform: scale(1)
+  #{25/$seconds-total}%, #{75/$seconds-total}%,
+  #{37.5/$seconds-total}%, #{62.5/$seconds-total}%
+    transform: rotate(0deg) scale(1.2)
+  #{45/$seconds-total}%
+    transform: rotate(5deg) scale(1.2)
+  #{55/$seconds-total}%
+    transform: rotate(-5deg) scale(1.2)
+
+@keyframes color-pulse
+  0%, 100%
+    background-color: $flixpress-red
+  50%
+    background-color: lighten($flixpress-red, 20)
+
+h1
+  padding: 1em
+  background-color: $flixpress-blue
+  color: white
+  &.image-chooser-title span
+    display: block
+    width: 100%
+    transition: all 1.5s ease
+    
+.may-proceed h1.image-chooser-title span
+  width: calc(100% - 14em)
+  +breakpoint($proceed-breakpoint)
+    width: 100%
 
 input[type="submit"], input[type="button"], button
   +button
+  
+
+  &.proceed-button
+    font-size: 1.5em
+    position: fixed
+    top: 0.5em
+    right: 0.5em
+    z-index: 100
+    padding: 0.5em
+    box-shadow: 5px 6px 20px rgba(0,0,0,0.7)
+    width: 6em
+    transition: all 1.5s ease
+    transition-property: opacity, width
+    +breakpoint($proceed-breakpoint)
+      width: calc(100% - 2em)
+    &.enabled
+      // animation: shake #{$seconds-of-movement * $seconds-total}s infinite, color-pulse 2s infinite
+      animation: color-pulse 2s infinite
+      width: 15em
+      +breakpoint($proceed-breakpoint)
+        width: calc(100% - 2em)
+      
+      &:hover
+        background-color: white
+        color: $flixpress-red
+        animation: none
 
   &[disabled=""], &[disabled="true"], &[disabled="1"]
+    &.proceed-button
+      box-shadow: 5px 6px 17px rgba(0,0,0,0.3)
+      opacity: 0.8
+      +breakpoint($proceed-breakpoint)
+        opacity: 0
+
     &, &:hover
       background-color: $disabled-button-color !important
       cursor: default !important
 
+.selection-requirements-verbiage
+  color: $flixpress-red
+.may-proceed .selection-requirements-verbiage
+  color: $flixpress-blue
 
 .pagination-container
   $pagination-button-color: $flixpress-blue
@@ -68,44 +138,77 @@ input[type="submit"], input[type="button"], button
   $background-color: #eee
   $hover-color: $flixpress-blue
   
+  text-align: center
+  
   > div
     display: inline-block
-    border: solid 10px transparent
-    background-color: $background-color
-    width: 25%
-    padding: 6px
+    box-sizing: content-box
     position: relative
-    background-color: transparent
-    z-index: 2
+    width: 150px
+    margin: 6px
     text-align: center
     
-    &:after
-      content: ''
-      border: 3px solid $background-color
-      background-color: $background-color
+    &.selected:before
+      content: ""
+      height: 25px
+      width: 25px
+      background: #fff url(/images/check.png) no-repeat center
+      z-index: 3
+      display: block
       position: absolute
-      +sides(0)
-      z-index: -1
-
+      border-radius: 100%
+      top: -6px
+      right: -6px
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.2)
+  
   .result-title
     background-color: $background-color
     padding: 3px
   
   img
-    max-width: 100%
+    max-width: 150px
     max-height: 150px
     display: block
-    margin: 6px auto
+    margin: auto
+    border: 6px solid $background-color
+    border-bottom-width: 27px
   
   button
     +button
+    margin: 0
+    margin-top: -24px
   .deselect
     +button($flixpress-red)
-
-.imageWrap
-  max-width: 120px
-  max-height: 90px
-  overflow: hidden
+    margin: 0
+    margin-top: -24px
 
 #selected_list, #hard_drive_images
   background-color: #dcdcdc
+  
+#hard_drive_images
+  display: none
+
+#uploading_div
+  position: absolute
+  +sides(0)
+  background-color: white
+  opacity: 0.9
+  padding-top: 4em
+  display: none
+  text-align: center
+  font-size: 3em
+  z-index: 100000
+  
+.upload-images-block, .search-library-block
+  float: left
+  width: 50%
+  margin: 0
+  padding: 1em
+  text-align: center
+  
+  button, input
+    font-size: 1.5em
+    padding: 0.3em 0.5em
+    
+.no-access-message
+  text-align: center
