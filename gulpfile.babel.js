@@ -140,7 +140,7 @@ gulp.task('replaceSliderCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
 });
 
-// Info sliders stuff
+// React Basic Template Editor
 gulp.task('replaceEditorCssLive', ['styles'], () => {
   return replaceOnDisk(
     '/* no-flash-editor.css build:begin */',
@@ -149,7 +149,7 @@ gulp.task('replaceEditorCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/templates/Styles/editor.css');
 });
 
-// Info sliders stuff
+// JS Image Selection Screen
 gulp.task('replaceImageSelectionCssLive', ['styles'], () => {
   return replaceOnDisk(
     '/* images-selection.css build:begin */',
