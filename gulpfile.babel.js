@@ -158,6 +158,15 @@ gulp.task('replaceImageSelectionCssLive', ['styles'], () => {
     '/Volumes/MediaRobot/templates/Styles/images-selection.css');
 });
 
+// Common Template Styles
+gulp.task('replaceCommonTemplateCssLive', ['styles'], () => {
+  return replaceOnDisk(
+    '/* common-template-styles.css build:begin */',
+    '/* common-template-styles.css build:end */',
+    '.tmp/common-template-styles.css',
+    '/Volumes/MediaRobot/templates/Styles/common-styles.css');
+});
+
 gulp.task('replaceSliderHtmlLive', () => {
   return replaceOnDisk(
     '<!-- slider.html build:begin -->',
@@ -203,6 +212,7 @@ gulp.task('devServer', () => {
   gulp.watch('src/sass/sliding.{scss,sass}', ['replaceSliderCssLive']);
   gulp.watch('src/sass/no-flash-editor.{sass,scss}', ['replaceEditorCssLive']);
   gulp.watch('src/sass/images-selection.{sass,scss}', ['replaceImageSelectionCssLive']);
+  gulp.watch('src/sass/common-template-styles.{scss,sass}', ['replaceCommonTemplateCssLive']);
   gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
   
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
