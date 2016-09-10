@@ -43,7 +43,7 @@
   min-height: 577px;
 }
 body {
-  margin:8px;
+  margin: $body-margin;
   position: relative;
 }
 /* Clearfix Body */
@@ -567,37 +567,58 @@ a.TabLink.active:hover:before {
   margin: auto;
 }
 
-div.user-message {
-  display: block;
-  padding: 1em;
-  background-color: #80bbd1;
-  border-color: #386f96;
+@mixin user-message-colors ($color: $flixpress-blue) {
+  border-color: $color;
+  background-color: desaturate(
+    lighten($color, 35), 
+    (saturation($color)) / 1.7 );
+  a {
+    color: darken($color, 10);
+    &:hover {
+      color: $color;
+    }
+  }
+}
+
+.user-message {
+  font-size: 1.3em;
+  padding: 0.3em 0.5em;
+  border-radius: 0.3em;
+  
+  border-width: 1px;
+  border-style: solid;
+  @include user-message-colors();
   color: #111;
+}
+
+div.user-message {
+  padding: 1em;
   border-style: dashed;
   border-width: 2px;
   text-align: center;
+  border-radius: 0;
 }
-.user-message a {
-  color: #386f96;
-  text-decoration: underline !important;
-}
-.user-message.good {
-  background-color: #84d180;
-  border-color: #3d9638;
-}
-.user-message.bad {
-  background-color: #d18080;
-  border-color: #911;
-}
-.user-message.warning {
-  background-color: #f0ec93;
-  border-color: #d6ac18;
-}
-.user-message > :last-child {
-  margin-bottom: 0;
-}
-.user-message > :first-child {
-  margin-top: 0;
+
+.user-message {
+  a {
+    text-decoration: underline !important;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+  }
+  &.good {
+    @include user-message-colors(#3d9638);
+  }
+  &.bad {
+    @include user-message-colors($flixpress-red);
+  }
+  &.warning {
+    @include user-message-colors(#d6ac18);
+  }
+  & > :last-child {
+    margin-bottom: 0;
+  }
+  & > :first-child {
+    margin-top: 0;
+  }
 }
 
 .trial-message {

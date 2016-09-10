@@ -9,6 +9,8 @@
   color: $color
   border: none
   box-shadow: 1px 1px 3px rgba(0,0,0,0.5)
+  text-decoration: none
+  text-align: center
   &:hover
     background-color: darken($bgcolor, 7)
     
@@ -44,7 +46,7 @@ h1
     transition: all 1.5s ease
     
 .may-proceed h1.image-chooser-title span
-  width: calc(100% - 14em)
+  width: calc(100% - 15em)
   +breakpoint($proceed-breakpoint)
     width: 100%
 
@@ -53,11 +55,10 @@ input[type="submit"], input[type="button"], button
   
 
   &.proceed-button
+    position: absolute
+    top: 0
+    right: 0
     font-size: 1.5em
-    position: fixed
-    top: 0.5em
-    right: 0.5em
-    z-index: 100
     padding: 0.5em
     box-shadow: 5px 6px 20px rgba(0,0,0,0.7)
     width: 6em
@@ -89,9 +90,12 @@ input[type="submit"], input[type="button"], button
       cursor: default !important
 
 .selection-requirements-verbiage
-  color: $flixpress-red
+  // color: $flixpress-red
+  // text-align: center
+  // font-size: 1.3em
+  // padding: 0.3em
 .may-proceed .selection-requirements-verbiage
-  color: $flixpress-blue
+  // color: $flixpress-blue
 
 .pagination-container
   $pagination-button-color: $flixpress-blue
@@ -183,11 +187,34 @@ input[type="submit"], input[type="button"], button
     +button($flixpress-red)
     margin: 0
 
-#selected_list, #hard_drive_images
-  background-color: #dcdcdc
+$fixed-select-list-space: 150px
+
+.image-upload-screen
+  padding-top: $fixed-select-list-space
+
+
+#list_wrapper
+  position: fixed
+  width: 100%
+  @include sides(0)
+  bottom: auto
+  z-index: 100
+  background-color: $flixpress-blue
+
+#selected_list
+  background-color: $flixpress-blue
+  white-space: nowrap
+  width: 100%
+  overflow-y: auto
+  .selected
+    width: 100px
+    img
+      max-height: 75px
+      max-width: 100px
   
 #hard_drive_images
   display: none
+  background-color: #dcdcdc
 
 #uploading_div
   position: absolute
@@ -206,10 +233,24 @@ input[type="submit"], input[type="button"], button
   margin: 0
   padding: 1em
   text-align: center
+  transition: all 0.5s ease
   
   button, input
     font-size: 1.5em
     padding: 0.3em 0.5em
     
+  &.active
+    position: absolute
+    +sides(0)
+    background-color: rgba(255,255,255,0.95)
+    width: 100%
+    
 .no-access-message
-  text-align: center
+  display: block
+  +button($flixpress-red)
+  margin: 1em auto
+  font-size: 1.3em
+  padding: 0.7em
+  max-width: 20em
+
+
