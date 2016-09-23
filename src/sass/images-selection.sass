@@ -1,4 +1,5 @@
 @import "base-includes"
+@import "animations/dot-spinner"
 
 =button($bgcolor: $flixpress-blue, $color: white)
   cursor: pointer
@@ -138,13 +139,14 @@ input[type="submit"], input[type="button"], button
       +arrow(left, $pointer-size, $disabled-button-color)
 
 
-#results_list, #selected_list, #hard_drive_images
+#results_list, #selected_list, #overflow_images
   $background-color: #eee
   $hover-color: $flixpress-blue
   
+  position: relative
   text-align: center
   
-  > div
+  > div.result, div.selectable-user-image, div.selectable-object
     display: inline-block
     box-sizing: content-box
     position: relative
@@ -187,7 +189,7 @@ input[type="submit"], input[type="button"], button
     +button($flixpress-red)
     margin: 0
 
-$fixed-select-list-space: 150px
+$fixed-select-list-space: 175px
 
 .image-upload-screen
   padding-top: $fixed-select-list-space
@@ -206,17 +208,18 @@ $fixed-select-list-space: 150px
   white-space: nowrap
   width: 100%
   overflow-y: auto
-  .selected
+  div.selectable-object
     width: 100px
     img
       max-height: 75px
       max-width: 100px
   
-#hard_drive_images
+#overflow_images
   display: none
   background-color: #dcdcdc
+  margin-bottom: 2em
 
-#uploading_div
+#uploading_div, .waiting
   position: absolute
   +sides(0)
   background-color: white
@@ -226,6 +229,9 @@ $fixed-select-list-space: 150px
   text-align: center
   font-size: 3em
   z-index: 100000
+  
+  .bouncer
+    +dot-spinner($flixpress-red)
   
 .upload-images-block, .search-library-block
   float: left
@@ -252,5 +258,42 @@ $fixed-select-list-space: 150px
   font-size: 1.3em
   padding: 0.7em
   max-width: 20em
+  
+.selection-method-title
+  font-size: 1.7em
+  font-weight: 100
 
-
+.video-selection, .audio-selection
+  video, audio
+    width: 100%
+  
+  #search_bar
+    > *
+      padding: 1em
+    .searchbar-title
+      display: none
+    .first-search
+      padding: 0
+      width: 100%
+      text-align: center
+      position: absolute
+      bottom: 50%
+      .searchbar-title
+        display: block
+        font-size: 3em
+        font-weight: bold
+  .video-title, .audio-title, #infoPane h3
+    height: 2em
+    line-height: 1
+    padding-top: 0
+    padding-bottom: 0
+    overflow: hidden
+    text-align: center
+  #video_results_list, #audio_results_list
+    position: relative
+    text-align: center
+    > .selectable-object
+      vertical-align: top
+  #audio_results_list
+    > .selectable-object:hover
+      box-shadow: 0 0 12px $flixpress-red
