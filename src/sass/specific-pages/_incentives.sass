@@ -1,4 +1,3 @@
-@import 'compass/utilities/general/clearfix'
 @import 'base-includes'
 
 $nothing: #ccc
@@ -104,7 +103,7 @@ $border-width: 6px
     +breakpoint($lg)
       .month
         font-size: 1em
-  
+
   .option
     margin-bottom: $border-width
     padding: 0.75em 1em
@@ -114,51 +113,51 @@ $border-width: 6px
     padding-left: 1em
     color: #777
     font-size: 0.9em
-  
+
   .rewards-table
     margin-top: $top-space
-    
+
     table
       width: 100%
     td, th
       padding: 6px
     th
       background-color: #ddd
-  
+
   .points, .referral, .earned-months
     h4, h3
       font-size: 3em
-      
-  .earning-points  
+
+  .earning-points
     background-color: #ddd
     text-align: center
-    
+
     .points, .referral
       padding: 12px
-      
+
       .explainer
         max-width: 400px
         margin-left: auto
         margin-right: auto
-      
+
       .referral-link
         margin: 24px auto
         code
           color: $flixpress-red
-      
+
       &:first-child
         border-bottom: $border-width solid #fff
         +breakpoint($sm)
           border-right: $border-width solid #fff
           border-bottom: none
-          
+
   .how-it-works, .options
     margin-top: $top-space
-    
+
   .options-button
     float: right
 
-  .explainer-rows .row:last-child 
+  .explainer-rows .row:last-child
     > div
       float: none
       margin-left: auto
