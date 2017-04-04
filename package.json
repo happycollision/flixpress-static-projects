@@ -13,7 +13,7 @@
   "repository": "happycollision/flixpress-preview-organizer",
   "license": "MIT",
   "scripts": {
-    "test": "grunt"
+    "css": "gulp devServer"
   },
   "devDependencies": {
     "autoprefixer-core": "^5.1.11",

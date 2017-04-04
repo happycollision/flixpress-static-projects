@@ -7,13 +7,16 @@ import browserSync from 'browser-sync';
 import del from 'del';
 import rs from 'run-sequence';
 import rename from 'gulp-rename';
-// import {stream as wiredep} from 'wiredep';
+const argv = require('yargs').argv;
 
 // NodeJS level requires:
 import fs from 'fs';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
+
+const pathToMediaRobot = argv.basePath.replace(/\\/g, '/');
+
 
 // /* I am doing this slightly different than suggested at https://github.com/nkostelnik/gulp-s3
 //    With my version, only the Key and Secret are in the JSON file. I can define the
@@ -35,15 +38,9 @@ gulp.task('styles', (cb) => {
   return gulp.src('src/sass/*.{scss,sass}')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.compass({
-      outputStyle: 'expanded',
-      precision: 10,
-      css: '.tmp/.css',
-      sass: 'src/sass',
-      require: ['susy','breakpoint']
-    }).on('error', function(err){cb(err);}))
+    .pipe($.sass({ outputStyle: 'expanded' }).on('error', function(err){cb(err);}))
     .pipe($.autoprefixer({browsers: ['last 10 versions']}))
-    .pipe($.sourcemaps.write())
+    // .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/'))
     .pipe(reload({stream: true}));
 });
@@ -78,12 +75,18 @@ function replaceOnDisk (begStr, endStr, insertFile, destFile, destDir) {
   // Hence the two slashes where you'd normally see one in the
   // string below.
   var regex2 = new RegExp(`${beginningStringEsc}([^]*)${endingStringEsc}`);
-  return gulp.src(srcFile)
-    .pipe($.replace(regex2, (match, p1, offset, string) => {
-      return `${beginningString}\n\n${insert}\n\n${endingString}`;
-    }))
-    .pipe($.lineEndingCorrector({eolc: 'CRLF'}))
-    .pipe(gulp.dest(destDir));
+
+  fs.readFile(pathToMediaRobot + srcFile, 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+    var result = data.replace(regex2, `${beginningString}\n\n${insert}\n\n${endingString}`);
+
+    fs.writeFile(pathToMediaRobot + srcFile, result, 'utf8', function (err) {
+       if (err) return console.log(err);
+    });
+  });
+  return;
 };
 
 // Plan Slider stuff
@@ -92,7 +95,7 @@ gulp.task('replacePlanCssLive', ['styles'], () => {
     '/* plan-slider.css build:begin */',
     '/* plan-slider.css build:end */',
     '.tmp/plan-slider.css',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+    '/Portals/_default/Skins/Fusion/css/default.css');
 });
 
 // Plan Slider stuff
@@ -101,7 +104,7 @@ gulp.task('replaceHelperCssLive', ['styles'], () => {
     '/* helpers-and-blocks.css build:begin */',
     '/* helpers-and-blocks.css build:end */',
     '.tmp/helpers-and-blocks.css',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+    '/Portals/_default/Skins/Fusion/css/default.css');
 });
 
 // many styles for individual pages
@@ -110,7 +113,7 @@ gulp.task('replaceSpecificPagesCssLive', ['styles'], () => {
     '/* specific-pages.css build:begin */',
     '/* specific-pages.css build:end */',
     '.tmp/specific-pages.css',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+    '/Portals/_default/Skins/Fusion/css/default.css');
 });
 
 // pricing css stuff
@@ -119,7 +122,7 @@ gulp.task('replacePricingCssLive', ['styles'], () => {
     '/* price-grid.css build:begin */',
     '/* price-grid.css build:end */',
     '.tmp/pricing-grid.css',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/pricing-grid.css');
+    '/Portals/_default/Skins/Fusion/css/pricing-grid.css');
 });
 
 // template browser css stuff
@@ -128,7 +131,7 @@ gulp.task('replaceTemplateBrowserCssLive', ['styles'], () => {
     '/* template-browser.css build:begin */',
     '/* template-browser.css build:end */',
     '.tmp/template-browser.css',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+    '/Portals/_default/Skins/Fusion/css/default.css');
 });
 
 // Info sliders stuff
@@ -137,7 +140,7 @@ gulp.task('replaceSliderCssLive', ['styles'], () => {
     '/* slider.css build:begin */',
     '/* slider.css build:end */',
     '.tmp/sliding.css',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/css/default.css');
+    '/Portals/_default/Skins/Fusion/css/default.css');
 });
 
 // React Basic Template Editor
@@ -146,7 +149,7 @@ gulp.task('replaceEditorCssLive', ['styles'], () => {
     '/* no-flash-editor.css build:begin */',
     '/* no-flash-editor.css build:end */',
     '.tmp/no-flash-editor.css',
-    '/Volumes/MediaRobot/templates/Styles/editor.css');
+    '/templates/Styles/editor.css');
 });
 
 // JS Image Selection Screen
@@ -155,7 +158,7 @@ gulp.task('replaceImageSelectionCssLive', ['styles'], () => {
     '/* images-selection.css build:begin */',
     '/* images-selection.css build:end */',
     '.tmp/images-selection.css',
-    '/Volumes/MediaRobot/templates/Styles/images-selection.css');
+    '/templates/Styles/images-selection.css');
 });
 
 // Common Template Styles
@@ -164,7 +167,7 @@ gulp.task('replaceCommonTemplateCssLive', ['styles'], () => {
     '/* common-template-styles.css build:begin */',
     '/* common-template-styles.css build:end */',
     '.tmp/common-template-styles.css',
-    '/Volumes/MediaRobot/templates/Styles/common-styles.css');
+    '/templates/Styles/common-styles.css');
 });
 
 gulp.task('replaceSliderHtmlLive', () => {
@@ -172,7 +175,7 @@ gulp.task('replaceSliderHtmlLive', () => {
     '<!-- slider.html build:begin -->',
     '<!-- slider.html build:end -->',
     'src/_sliding-part.html',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/CommonParts/TargetAudienceSliders.ascx');
+    '/Portals/_default/Skins/Fusion/CommonParts/TargetAudienceSliders.ascx');
 });
 
 gulp.task('replaceSliderJsLive', () => {
@@ -180,7 +183,7 @@ gulp.task('replaceSliderJsLive', () => {
     '/*/ slider.js build:begin /*/',
     '/*/ slider.js build:end /*/',
     'src/_sliding-part.js',
-    '/Volumes/MediaRobot/Portals/_default/Skins/Fusion/CommonParts/TargetAudienceSliders.ascx');
+    '/Portals/_default/Skins/Fusion/CommonParts/TargetAudienceSliders.ascx');
 });
 
 gulp.task('replaceSliderJsLocal', () => {
@@ -204,6 +207,11 @@ gulp.task('replaceSliderLocal', () => {
 });
 
 gulp.task('devServer', () => {
+  if (!pathToMediaRobot) {
+    console.log('You must specify a path with something like `npm run css -- --base-path=/Volumes/MediaRobot` on Mac or `npm run css -- --base-path=\\\\DEVOLVED-SERVER\\Sites\\Andrey` on Windows');
+    process.exit();
+  }
+
   gulp.watch('src/sass/template-browser.{scss,sass}', ['replaceTemplateBrowserCssLive']);
   gulp.watch('src/sass/pricing-grid.{scss,sass}', ['replacePricingCssLive']);
   gulp.watch(['src/sass/specific-pages.{scss,sass}','src/sass/specific-pages/*'], ['replaceSpecificPagesCssLive']);
@@ -214,7 +222,7 @@ gulp.task('devServer', () => {
   gulp.watch('src/sass/images-selection.{sass,scss}', ['replaceImageSelectionCssLive']);
   gulp.watch('src/sass/common-template-styles.{scss,sass}', ['replaceCommonTemplateCssLive']);
   gulp.watch('src/_sliding-part.js', ['replaceSliderJsLive']);
-  
+
   // THE FOLLOWING FILES HAVE DIVERGED ON THE SERVER.
   // Do not update here without pulling in the changes.
   // (The build tags were removed on the server, too, to avoid issues.)
@@ -230,72 +238,6 @@ gulp.task('replaceInReact', ['styles'],()=>{
     .pipe(gulp.dest('/Users/Don/Documents/Current Projects/reactTextOnly/src/styles'));
 });
 
-// function lint(files, options) {
-//   return () => {
-//     return gulp.src(files)
-//       .pipe(reload({stream: true, once: true}))
-//       .pipe($.eslint(options))
-//       .pipe($.eslint.format())
-//       .pipe($.if(!browserSync.active, $.eslint.failAfterError()));
-//   };
-// }
-// const testLintOptions = {
-//   env: {
-//     mocha: true
-//   }
-// };
-
-// gulp.task('lint', lint('app/**/*.js'));
-// gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
-
-// gulp.task('html', ['styles'], () => {
-//   const assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
-
-//   return gulp.src('app/*.html')
-//     .pipe(assets)
-//     .pipe($.if('*.js', $.uglify()))
-//     .pipe($.if('*.css', $.minifyCss({compatibility: '*'})))
-//     .pipe(assets.restore())
-//     .pipe($.useref())
-//     .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
-//     .pipe(gulp.dest('dist'));
-// });
-
-// gulp.task('images', () => {
-//   return gulp.src('app/images/**/*')
-//     .pipe($.if($.if.isFile, $.cache($.imagemin({
-//       progressive: true,
-//       interlaced: true,
-//       // don't remove IDs from SVGs, they are often used
-//       // as hooks for embedding and styling
-//       svgoPlugins: [{cleanupIDs: false}]
-//     }))
-//     .on('error', function (err) {
-//       console.log(err);
-//       this.end();
-//     })))
-//     .pipe(gulp.dest('dist/images'));
-// });
-
-// gulp.task('fonts', () => {
-//   return gulp.src(require('main-bower-files')({
-//     filter: '**/*.{eot,svg,ttf,woff,woff2}'
-//   }).concat('app/fonts/**/*'))
-//     .pipe(gulp.dest('.tmp/fonts'))
-//     .pipe(gulp.dest('dist/fonts'));
-// });
-
-// gulp.task('extras', () => {
-//   return gulp.src([
-//     'app/*.*',
-//     '!app/*.html'
-//   ], {
-//     dot: true
-//   }).pipe(gulp.dest('dist'));
-// });
-
-// gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
-
 gulp.task('serve', ['styles'/*, 'fonts'*/], () => {
   browserSync({
     notify: false,
@@ -307,7 +249,7 @@ gulp.task('serve', ['styles'/*, 'fonts'*/], () => {
       }
     }
   });
-  
+
   gulp.src(['src/sliding.html']).pipe(gulp.dest('.tmp/'));
 
   rs('replaceSliderLocal');
@@ -326,72 +268,3 @@ gulp.task('serve', ['styles'/*, 'fonts'*/], () => {
   // gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
-// gulp.task('serve:dist', () => {
-//   browserSync({
-//     notify: false,
-//     port: 9000,
-//     server: {
-//       baseDir: ['dist']
-//     }
-//   });
-// });
-
-// gulp.task('serve:test', () => {
-//   browserSync({
-//     notify: false,
-//     port: 9000,
-//     ui: false,
-//     server: {
-//       baseDir: 'test',
-//       routes: {
-//         '/bower_components': 'bower_components'
-//       }
-//     }
-//   });
-
-//   gulp.watch('test/spec/**/*.js').on('change', reload);
-//   gulp.watch('test/spec/**/*.js', ['lint:test']);
-// });
-
-// // inject bower components
-// gulp.task('wiredep', () => {
-//   gulp.src('app/styles/*.scss')
-//     .pipe(wiredep({
-//       ignorePath: /^(\.\.\/)+/
-//     }))
-//     .pipe(gulp.dest('app/styles'));
-
-//   gulp.src('app/*.html')
-//     .pipe(wiredep({
-//       ignorePath: /^(\.\.\/)*\.\./
-//     }))
-//     .pipe(gulp.dest('app'));
-// });
-
-// gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
-//   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
-// });
-
-// gulp.task('default', ['clean'], () => {
-//   gulp.start('build');
-// });
-
-// gulp.task('requirejs', () => {
-//   return gulp.src('app/lib/flixpress.js')
-//     .pipe($.requirejsOptimize({
-//       optimize: 'none',
-//       mainConfigFile: 'app/lib/config.js',
-//       name: 'flixpress',
-//       insertRequire: ['flixpress']
-//     }))
-//     .pipe($.wrap('(function () {<%= contents %>}());'))
-//     .pipe($.addSrc.prepend('bower_components/almond/almond.js'))
-//     .pipe($.concat('flixpress.js'))
-//     .pipe($.s3(awsCredentials, awsOptions))
-//     .pipe(gulp.dest('.tmp'))
-// });
-
-// gulp.task('develop', ['requirejs'], () => {
-
-//   gulp.watch('app/**/*.js', ['requirejs']);
-// });
