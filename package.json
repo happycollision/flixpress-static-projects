@@ -13,7 +13,7 @@
   "repository": "happycollision/flixpress-preview-organizer",
   "license": "MIT",
   "scripts": {
-    "test": "grunt"
+    "css": "gulp devServer"
   },
   "devDependencies": {
     "autoprefixer-core": "^5.1.11",
@@ -41,11 +41,17 @@
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
+    "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^2.0.0",
     "opn": "^3.0.2",
     "run-sequence": "^1.1.5",
     "time-grunt": "^1.0.0"
+  },
+  "dependencies": {
+    "breakpoint-sass": "^2.7.1",
+    "susy": "^2.2.12",
+    "yargs": "^7.0.2"
   }
 }
