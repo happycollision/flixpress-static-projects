@@ -344,91 +344,79 @@ h3 {
 
 .DescriptionDiv {
   margin-top: 20px;
-  line-height: 1.3em;
+  line-height: 1.5;
 }
 
 .ApplicationDiv {
   width: 100%;
   margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+
+  .ClearBoth {
+    display: none;
+  }
 }
+
+.CommandButtonsDiv {
+  flex-grow: 33;
+  display: flex;
+  justify-content: flex-end;
+
+  /* The next container down is groupings that render based on conditions. */
+  > div {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    // the next nested item is the .CommandDiv
+  }
+}
+
+.CommandDiv {
+  width: 142px;
+}
+
 
 .FinanceDiv {
-  float: left;
+  flex-grow: 67;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.FinanceDiv > div {
-  float: left;
-  margin-right: 10px;
-}
+.CreditDiv, .TemplatePriceDiv {
+  flex-grow: 1;
 
+  .Display {
+    background: #d4d4d4;
+    padding: 1em;
+  }
 
-.FinanceDiv .Display
- {
-  /*padding: 5px;*/
-  height: 115px;
-  background: #d4d4d4;
+  .Note {
+    font-size: 0.8em;
+    margin-top: 8px;
+    padding: 0 3px 0 5px;
+    display: none;
+  }
 
-}
+  .Label {
+    text-align: center;
+    font-weight: bold;
+  }
 
-.TemplatePriceDiv .Display {
-  margin-left: 43px;
-  position: relative;
-}
-.TemplatePriceDiv .Display:before {
-  position: absolute;
-  content: '';
-  width:42px;
-  top:0;
-  bottom:0;
-  left:-42px;
-  background: url('../assets/big-tag.png') left no-repeat;
-}
+  .Info {
+    padding-top: 5px;
+    font-size: 400%;
+    text-align: center;
+  }
 
-
-.CreditDiv .Display > div {
-  background-color: #d4d4d4;
-}
-
-.FinanceDiv .Note {
-  font-size: 0.8em;
-  margin-top: 8px;
-  padding: 0 3px 0 5px;
-}
-.TemplatePriceDiv .Note {
-  margin-left: 43px;
-}
-
-.TemplatePriceDiv {
-  width: 200px;
-}
-
-.FinanceDiv .Label {
-  padding-top: 10px;
-  text-align: center;
-  font-weight: bold;
-}
-
-.TemplatePriceDiv .Info,
-.CreditDiv .Info {
-  padding-top: 5px;
-  padding-bottom: 10px;
-  font-size: 400%;
-  text-align: center;
 }
 
 .CreditDiv .Info {
-  color: #006600;
+  color: #060;
 }
 
-.CreditDiv {
-  max-width: 180px;
-}
-
-.CommandsDiv > div, .CommandButtonsDiv > div {
-  float: left;
-  margin-left: 10px;
-  text-align: center;
-}
 .LeftBoxDiv {
   background-color: #eee;
 
@@ -540,22 +528,12 @@ h3 {
 }
 
 
-.CommandDiv {
-  width: 142px;
-  float: left;
-}
-
-.CommandButtonsDiv {
-  float: right;
-  margin-top: 20px;
-}
-
-
 .CommandDiv .fa {
-  line-height: 72px;
   color: #D4D4D4;
   display: block;
+  padding: 12px;
   text-align: center;
+  font-size: 3.5em;
 }
 
 .EnabledButton, .DisabledButton {
@@ -731,9 +709,6 @@ div.user-message {
 }
 
 .trial-message {
-  position: absolute;
-  bottom: 12px;
-  right: 1%;
-  left: 68%;
+  margin-top: 18px;
   box-sizing: border-box;
 }
