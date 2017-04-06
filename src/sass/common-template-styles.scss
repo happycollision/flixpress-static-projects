@@ -1,5 +1,6 @@
 @import 'base-includes';
 
+$twoColumnSplit: 700px;
 /*
   Order:
 
@@ -68,31 +69,154 @@ body:after {
 * html .group             { zoom: 1; } /* IE6 */
 *:first-child+html .group { zoom: 1; } /* IE7 */
 
-.columnTwo {
-  float: right;
-  width: 330px;
-}
 .DefaultPanel {
+  $panelPadding: 24px;
   background-color: #eee;
-  padding: 24px;
+  padding: $panelPadding;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .content .instructions {
+    overflow: auto;
+  }
+
+  > h1,
+  > h2,
+  > h3 {
+    margin: 0 -#{$panelPadding};
+    &:first-child {
+      margin-top: -#{$panelPadding}
+    }
+  }
 }
-.MainPanel {
-  float:left;
-  width: 640px;
-  /*min-height: 550px;*/
+
+%toOrdersBtn {
+  font-size: 1.2em;
+  display: inline-block;
+  text-align:center;
+  text-decoration:none;
+  padding: 0.5em 0.75em;
+  background-color: $flixpress-blue;
+  color: white;
+  border-radius: 0.25em;
+  box-shadow: 3px 3px 12px rgba(0,0,0,0.3);
+
+  &:hover {
+    background-color: darken($flixpress-blue, 10);
+  }
 }
-.DefaultPanel .content .instructions {
-  overflow: auto;
+
+.fp-UserControlsRenderConfirmation-bottomActions {
+  text-align: center;
+  @include breakpoint($twoColumnSplit) {
+    text-align: right;
+  }
 }
-.DefaultPanel > *:last-child {
-  margin-bottom: 0;
+
+.fp-UserControlsRenderConfirmation-bottomToOrders {
+  @extend %toOrdersBtn;
+  margin: 12px;
 }
+
+.fp-UserControlsRenderConfirmation-topToOrders {
+  @extend %toOrdersBtn;
+  float: right;
+}
+
+.fp-UserControlsRenderConfirmation-header {
+  background-color: #333;
+  padding: 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fp-UserControlsRenderConfirmation-mainHeadingMessage {
+  text-align: left;
+  display: inline;
+  background: none;
+}
+
+.fp-UserControlsRenderConfirmation-information {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+
+  @include breakpoint($twoColumnSplit) {
+    flex-direction: row;
+  }
+}
+
+.fp-UserControlsRenderConfirmation-mainInfo {
+  flex-basis: 66%;
+  flex-grow: 1;
+  background-color: #f5f5f5;
+  padding: 1em
+}
+
+.fp-UserControlsRenderConfirmation-additionalInfo {
+  flex-basis: 34%;
+  flex-grow: 1;
+  background-color: #eee;
+}
+
+.fp-UserControlsRenderConfirmation-likeUs {
+  margin: 2em auto;
+  max-width: 400px;
+}
+
+.fp-UserControlsRenderConfirmation-facebookFrame {
+  background: white;
+  border: none;
+  display: block;
+  overflow: hidden;
+  width: 292px;
+  clear: both;
+  height: 216px;
+  margin: auto;
+}
+
+.fp-UserControlsRenderConfirmation-renderingAnnouncement {
+  background: none;
+  font-size: 2em;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fp-UserControlsRenderConfirmation-renderingMessage {
+  background: none;
+  margin: 0;
+  max-width: 15em;
+}
+
+.fp-UserControlsRenderConfirmation-renderSpinner {
+  width: 50px;
+  margin: 8px;
+}
+
+.fp-UserControlsRenderConfirmation-monetizationConditions {
+  list-style: none;
+  padding: 0;
+  padding-left: 3em;
+
+  > li {
+    padding: 0;
+    text-indent: -2em;
+  }
+}
+
 label[for=AgreeToTerms_CB] {
   padding-left: 3em;
   width:50%;
   float: left;
   margin-top: 24px;
 }
+
 label[for=AgreeToTerms_CB] input {
   display: block;
   float: left;
@@ -123,19 +247,6 @@ label[for=AgreeToTerms_CB] input {
 .video h3, .videoWrapper {
   width: 600px;
   margin: auto;
-}
-
-.orderRedirectButton {
-  position: absolute;
-  bottom: 0;
-  width: 142px;
-  right:0;
-  display: block;
-  text-align: center;
-}
-.orderRedirectButton .fa {
-  line-height: 72px;
-  color: #D4D4D4;
 }
 
 .CropBoxDiv {
@@ -188,17 +299,6 @@ h1, h2, h3 {
   -webkit-font-smoothing: antialiased;
 }
 
-.DefaultPanel > h1,
-.DefaultPanel > h2,
-.DefaultPanel > h3 {
-  margin: 0 -24px;
-}
-
-.DefaultPanel > h1:first-child,
-.DefaultPanel > h2:first-child,
-.DefaultPanel > h3:first-child {
-  margin-top: -24px;
-}
 
 h2 {
 
@@ -224,12 +324,21 @@ h3 {
 }
 
 .VideoDiv video {
-  width: 67%;
+  width: 100%;
+
+  @include breakpoint($twoColumnSplit) {
+    width: 67%;
+  }
 }
 
 .InfoDiv {
-  width: 33%;
-  float: right;
+  width: 100%;
+  float: none;
+
+  @include breakpoint($twoColumnSplit) {
+    width: 33%;
+    float: right;
+  }
 }
 
 
@@ -321,7 +430,7 @@ h3 {
   text-align: center;
 }
 .LeftBoxDiv {
-  background-color:#EEE;
+  background-color: #eee;
 
   float:left;
   width: 49%;
@@ -365,7 +474,7 @@ h3 {
   width: 50%;
   margin-bottom:5px;
 
-  background-color:#EEE;
+  background-color: #eee;
   text-align:left;
   line-height:130%;
 
